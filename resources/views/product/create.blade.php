@@ -1,33 +1,9 @@
 @extends('layouts.app')
 
 {{-- Title of the app or resource <title>App</title> --}}
-
-@section('title', 'Pievienot jaunu preci' ?? config('app.name'))
+@section('title', 'Pievienot jaunu preci')
 
 @section('content')
-
-<header>
-    {{-- Title of the site --}}
-    <h1>Pievienot jaunu preci</h1>
-    {{-- Document description --}}
-    <p>Pievieno jaunas preces ierakstu datubāzē</p>
-    {{-- Šis varētu būt komponents --}}
-    {{-- Document content/navigation --}}
-
-    <nav>
-        <ul>
-            <li>
-                <a href="#!">Menu item/</a>
-            </li>
-            <li>
-                <a href="#!">Menu item/</a>
-            </li>
-            <li>
-                <a href="#!">Menu item/</a>
-            </li>
-        </ul>
-    </nav>
-</header>
 
 {{-- Main content of the document --}}
 <main>

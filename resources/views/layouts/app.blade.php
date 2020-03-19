@@ -19,8 +19,7 @@
       rel="stylesheet">
     
     {{-- Title --}}
-    {{-- nestrādā 'Vietnes nosaukums' iespēja --}}
-    <title>@yield('title')</title>
+    <title>@yield('title', config('app.name'))</title>
 
 {{-- 
     <!-- Styles -->

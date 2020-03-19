@@ -1,3 +1,5 @@
+Laravel composer izmanto lai izveidotu piemēram formas, lai nav manuali jātaisa blade faili katram inputam
+
 Ze Category
 
 todo:
