@@ -108,7 +108,15 @@ class ProductController extends Controller
         ]);
 
         // Add slug
-        $data['slug'] = Str::slug($data['name'], '-');
+        $slug = Str::slug($data['name'], '-');
+        
+        // Check if slug exists
+        if(Product::where('slug', $slug)->first()) {
+            //change slug
+            $slug .= mt_rand( 0, time() );
+        }
+        
+        $data['slug'] = $slug;
         
         // Check if image key exists
         if (array_key_exists('image', $data)) {
