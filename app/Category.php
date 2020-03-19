@@ -12,5 +12,15 @@ class Category extends Model
      * @var array
      * 
      */
-    protected $fillable = [ 'name', 'arrangement' ];
+    protected $fillable = [ 'name', 'arrangement', 'slug' ];
+
+    /**
+     * Get the products
+     * 
+     * //$category->products
+     */
+    public function products() {
+        //vajag pamēģināt arī hasMany(Product::class) 
+        return $this->hasMany(Product::class, 'category_id'); // select * from dishes where category_id = 
+    }
 }

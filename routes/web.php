@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('index');
 // });
 
-Route::get('/', 'PageController@index')->name('root');
+Route::get('/', 'SiteController@index')->name('root');
 
 Route::post('/product', 'ProductController@store')->middleware('auth');
 Route::get('/product/create', 'ProductController@create')->name('product.create')->middleware('auth');
@@ -36,6 +36,6 @@ Auth::routes([
     'confirm' => false
     ]);
 
-//Auth::routes();
+// Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout'); //Kā tas strādā?
 Route::get('/home', 'HomeController@index')->name('home');

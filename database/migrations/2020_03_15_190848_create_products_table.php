@@ -22,6 +22,10 @@ class CreateProductsTable extends Migration
             $table->decimal('quantity', 8, 2)->nullable();
             $table->decimal('price', 8, 2)->nullable();
             $table->timestamps();
+
+            //Foreign Key
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -104,6 +105,10 @@ class CategoryController extends Controller
             'arrangement' => 'numeric | nullable'
         ]);
 
+        // Add slug
+        
+        $data['slug'] = Str::slug($data['name'], '-');
+        // dd($data);
         return $data;
     }
 }

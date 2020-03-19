@@ -19,7 +19,7 @@
       rel="stylesheet">
     
     {{-- Title --}}
-    <title>@yield('title', config('app.name'))</title>
+    <title>@yield('title', $siteName ?? config('app.name'))</title>
 
 {{-- 
     <!-- Styles -->
@@ -32,9 +32,9 @@
 <body>
     <header>
         {{-- Title of the document --}}
-        <h1>{{ $siteName }}</h1>
+        <h1>{{ $siteName ?? config('app.name')}}</h1>
         {{-- Document description --}}
-        <p>{{ $siteDescription }}</p>
+        <p>{{ $siteDescription ?? 'Do you need description?'}}</p>
         {{-- Šis varētu būt komponents --}}
         {{-- Document content/navigation --}}
     
@@ -46,6 +46,7 @@
             @if(Auth::user())
                 {{(Auth::user()->name)}}
                 <a href="{{route('product.create')}}">Create product</a>
+                <a href="{{route('category.create')}}">Create category</a>
                 <a href="/logout">Logout</a>
             @endif
         </nav>

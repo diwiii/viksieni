@@ -37,18 +37,8 @@ class ProductController extends Controller
      */
     public function store()
     {
-        // Get validated data array
-        $data = $this->validateData();
-
-        // Create slug from name of the resource
-        $slug = Str::slug($data['name'], '-');
-        if($slug) {
-            // Add slug to $data array
-            $data['slug'] = $slug;
-        }
-
-        // Product please create model from data.
-        Product::create($data);
+        // Product please create model from validated data.
+        Product::create($this->validateData());
 
         //Šis nosūtīs uz sākumu
         return redirect(route('root'));
@@ -107,14 +97,18 @@ class ProductController extends Controller
     {
 
         $data = request()->validate([
-            //'category_id' => 'required | numeric'
             //'featured' => 'numeric | nullable'
+            'category_id' => 'required | numeric',
             'name' => 'required',
             'price' => 'numeric | nullable',
             'description' => 'string | nullable',
             'image' => 'mimes:jpg,jpeg,png | image | nullable'
         ]);
 
+        // Add slug
+        $data['slug'] = Str::slug($data['name'], '-');
+        
+        // Check if image key exists
         if (array_key_exists('image', $data)) {
             return $this->processImage($data);
         }
@@ -125,7 +119,6 @@ class ProductController extends Controller
     /**
      * Returns array with altered 'image' value;
      */
-
     protected function processImage($data) 
     {
         $imagePath = $data['image']->store('uploads/product', 'public');

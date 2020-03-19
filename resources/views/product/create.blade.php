@@ -13,6 +13,27 @@
 
         {{-- this is form input field with label --}}
         <div>
+            <label for="category_id">Produkta iedalījums?</label>
+            <input 
+            id="category_id"
+            {{-- @error directive is fired and adds danger class whenever we get error --}}
+            @error('category_id')
+            class="danger"
+            @enderror
+            type="text"
+            name="category_id"
+            {{-- provide old input incase of error --}}
+            value="{{old('category_id')}}"
+            required
+            autofocus>
+
+            {{-- if error message --}}
+            @error('category_id')
+            <p>{{$errors->first('category_id')}}</p>
+            @enderror
+        </div>
+        {{-- this is form input field with label --}}
+        <div>
             <label for="name">Preces nosaukums</label>
             <input 
             id="name"
