@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Site;
+
 use \App\Product;
 use \App\Category;
 
@@ -19,11 +19,17 @@ class SiteController extends Controller
         //This is landing page! or is this?
 
         // Get category list
-        $category = Category::all()->toArray();
+        $categories = Category::orderBy('arrangement', 'asc')->get();
+            foreach ($categories as $category) {
+                $category->products;
+            }
+        $categories = $categories->toArray();
+        
+        // $category = Category::all()->toArray();
     
         //Get product list
         $products = Product::all()->toArray();
     
-        return view('index', compact('products','category'));
+        return view('index', compact('products','categories'));
     }
 }

@@ -7,6 +7,15 @@
 
 {{-- Main content of the document --}}
 <main>
+    <header>
+        <h1>Pievienot jaunu preci</h1>
+        {{-- iespēja izvēlēties ēdienu kategorijas --}}
+        <ul>
+            @foreach ($categories as $category)
+            <li>{{$category['name']}}, id: {{$category['id']}}</li>
+            @endforeach
+        </ul>
+    </header>
     <form method="POST" action="/product" enctype="multipart/form-data">
         {{-- cross site request forgery --}}
         @csrf

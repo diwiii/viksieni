@@ -10,9 +10,16 @@
     @section('content-nav')
     @parent
         <ul>
-        @foreach($category as $category)
+        @foreach($categories as $category)
             <li>
                 <a href="#{{$category['slug']}}">{{$category['name']}}</a>
+                <ul>
+                    @foreach($category['products'] as $product)
+                        <li>
+                            {{ $product['name'] }}
+                        </li>
+                    @endforeach
+                </ul>
             </li>
         @endforeach
         </ul>
