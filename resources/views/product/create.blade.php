@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- Title of the app or resource <title>App</title> --}}
-@section('title', 'Pievienot jaunu preci')
+@section('title', $siteName . ' - Pievienot jaunu preci')
 
 @section('content')
 

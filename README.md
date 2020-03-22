@@ -1,3 +1,5 @@
+PLEASE ADD destroy method
+
 SLUG VALIDATION OMG CHECK THE SLUG
 Slugiem vajag atsevišķu tabulu kura norāda uz id un id uz slugu
 

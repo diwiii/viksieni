@@ -1,19 +1,29 @@
 @extends('layouts.app')
 
 {{-- Title of the app or resource <title>App</title> --}}
-@section('title', $siteName . ' - Izveidot kategoriju')
+@section('title', $siteName . ' - Rediģēt ' . $category['name'])
 
 @section('content')
 
 {{-- Main content of the document --}}
 <main>
     <header>
-        <h1>Izveidot kategoriju</h1>
+        <h1>Rediģēt {{$category['name']}}</h1>
+        {{-- Lūdzu iespēju izvēlēties kategorijas --}}
+        <ul>
+            @foreach ($categories as $categoryItem)
+            <li>{{$categoryItem['name']}}, id: {{$categoryItem['id']}}</li>
+            @endforeach
+        </ul>
     </header>
 
-    <form method="POST" action="{{ route('category.store') }}">
+    {{-- form to edit category instance --}}
+    <form method="POST" action="{{ route('category.update', $category['id']) }}">
+        {{-- method to use instead of POST --}}
+        @method('PUT')
         {{-- cross site request forgery --}}
         @csrf
+        {{-- todo: iespēja izvēlēties ēdienu kategorijas --}}
 
         {{-- this is form input field with label --}}
         <div>
@@ -27,10 +37,10 @@
             type="text"
             name="name"
             {{-- provide old input incase of error --}}
-            value="{{old('name')}}"
+            value="{{old('name') ?? $category['name']}}"
             required
             autofocus>
-    
+
             {{-- if error message --}}
             @error('name')
             <p>{{$errors->first('name')}}</p>
@@ -48,24 +58,19 @@
             type="text"
             name="arrangement"
             {{-- provide old input incase of error --}}
-            value="{{old('arrangement')}}">
-    
+            value="{{old('arrangement') ?? $category['arrangement']}}">
+
             {{-- if error message --}}
             @error('arrangement')
             <p>{{$errors->first('arrangement')}}</p>
             @enderror
         </div>
-
-        <button type="submit">Pievienot</button>
+        <button type="submit">Saglabāt izmaiņas</button>
     </form>
-
-    {{-- ASIDE --}}
-    {{-- Pārtulkot latviski error fieldus php un html --}}
-    
-    {{-- side comments for category forms --}}
-    {{-- remove category --}}
-    {{-- if last add new category --}}
-    {{-- ASIDE --}}
-</main>
-
+<main>
 @endsection
+
+{{-- side comments for category forms --}}
+{{-- remove category --}}
+{{-- if last add new category --}}
+    

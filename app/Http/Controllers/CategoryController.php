@@ -63,6 +63,9 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         //
+        $category = $category->toArray();
+        $categories = Category::all();
+        return view('category.edit', compact('category', 'categories'));
     }
 
     /**

@@ -100,25 +100,11 @@ class ProductController extends Controller
     {
         //
     }
-
-
+    
     /**
-     * Process validated data
+     * Process validated request data
      * 
      * @return array
-     */
-    protected function processData($data) {
-
-        // Check if image key exists
-        if (array_key_exists('image', $data)) {
-            $data = $this->processImage($data);
-        }
-
-        return $data;
-    }
-
-    /**
-     * Returns validated data
      */
 
     protected function processRequestData($request) 

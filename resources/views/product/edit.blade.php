@@ -9,15 +9,16 @@
 <main>
     <header>
         <h1>Rediģēt {{$product['name']}}</h1>
-        {{-- iespēja izvēlēties ēdienu kategorijas --}}
+        {{-- Lūdzu iespēju izvēlēties kategorijas --}}
         <ul>
             @foreach ($categories as $category)
             <li>{{$category['name']}}, id: {{$category['id']}}</li>
             @endforeach
         </ul>
     </header>
+    
+    {{-- form to edit product instance --}}
     <form method="POST" action="{{route('product.update', $product['slug'])}}" enctype="multipart/form-data">
-
         {{-- method to use instead of POST --}}
         @method('PUT')
         {{-- cross site request forgery --}}
