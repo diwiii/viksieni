@@ -11,7 +11,7 @@
         <h1>Izveidot kategoriju</h1>
     </header>
 
-    <form method="POST" action="{{ route('category.store') }}">
+    <form method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data">
         {{-- cross site request forgery --}}
         @csrf
 
@@ -53,6 +53,27 @@
             {{-- if error message --}}
             @error('arrangement')
             <p>{{$errors->first('arrangement')}}</p>
+            @enderror
+        </div>
+        {{-- this is form input field with label --}}
+        <div>
+            <label for="image">Kategorijas bilde</label>
+            <input 
+            id="image"
+            {{-- @error directive is fired and adds danger class whenever we get error --}}
+            @error('image')
+            class="danger"
+            @enderror
+            type="file"
+            name="image"
+            {{-- provide old input incase of error --}}
+            {{-- we dont need old input for image --}}
+            {{-- value="{{old('image')}}" --}}
+            >
+    
+            {{-- if error message --}}
+            @error('image')
+            <p>{{$errors->first('image')}}</p>
             @enderror
         </div>
 

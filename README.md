@@ -1,3 +1,6 @@
+OMG this enctype="multipart/form-data 
+Please be sure to add enctype="multipart/form-data" if form will upload image;
+
 PLEASE ADD destroy method
 
 SLUG VALIDATION OMG CHECK THE SLUG

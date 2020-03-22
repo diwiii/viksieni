@@ -12,7 +12,7 @@ class Category extends Model
      * @var array
      * 
      */
-    protected $fillable = [ 'name', 'arrangement', 'slug' ];
+    protected $fillable = [ 'slug', 'name', 'arrangement', 'image', 'description' ];
 
     /**
      * Get the products
@@ -22,5 +22,20 @@ class Category extends Model
     public function products() {
         //vajag pamēģināt arī hasMany(Product::class) 
         return $this->hasMany(Product::class, 'category_id'); // select * from dishes where category_id = 
+    }
+
+    /**
+     * Atrod Modeli pēc slug colonas , default ir pēc primaryKey tas ir ID
+     * Pārraksta defaulto getRouteKeyName funkciju
+     */
+    public function getRouteKeyName() {
+        return 'slug';
+    }
+
+    /**
+     * Func that returns path of the model
+     */
+    public function path() {
+        return route('category.show', $this);
     }
 }

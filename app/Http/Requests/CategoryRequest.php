@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Category;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
-use App\Product;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
-class ProductRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,14 +27,15 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
+            //
             'slug' => Rule::unique('products')->ignore($this->id),
-            'category_id' => 'required | numeric',
             'name' => 'required',
-            'price' => 'nullable | numeric',
+            'arrangement' => 'nullable | numeric',
             'description' => 'nullable | string',
-            'image' => 'nullable |  image | mimes:jpg,jpeg,png'
+            'image' => 'nullable | mimes:jpg,jpeg,png | image'
         ];
     }
+
     
     /**
      * Prepare the data for validation.
@@ -64,11 +65,11 @@ class ProductRequest extends FormRequest
             $slug = Str::slug($this->name, '-');
         }
         // Check if slug exists in database and assign to variable
-        $product = Product::where('slug', $slug)->first();
+        $category = Category::where('slug', $slug)->first();
         // If slug exists
-        if($product) {
-            // And request id is not equal to product id
-            if ($product->id != $this->id ) {
+        if($category) {
+            // And request id is not equal to category id
+            if ($category->id != $this->id ) {
                 //Change slug
                 $slug = $slug . mt_rand( 0, time() );
             }

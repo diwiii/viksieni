@@ -43,7 +43,11 @@ Route::put('/product/{product}', 'ProductController@update')->name('product.upda
 Route::get('/category', 'CategoryController@index')->name('category.index');
 Route::post('/category', 'CategoryController@store')->name('category.store')->middleware('auth');
 Route::get('/category/create', 'CategoryController@create')->name('category.create')->middleware('auth');
+Route::get('/category/edit/{category}', 'CategoryController@edit')->name('category.edit')->middleware('auth');
+Route::get('/category/{category}', 'CategoryController@show')->name('category.show');
 Route::put('/category/{category}', 'CategoryController@update')->name('category.update')->middleware('auth');
-Route::get('/category/{category}/edit', 'CategoryController@edit')->name('category.edit')->middleware('auth');
+
+Route::delete('/category/{category}', 'CategoryController@destroy')->name('category.destroy')->middleware('auth');
+
 
 Route::get('/{product}', 'ProductController@show')->name('product.show');

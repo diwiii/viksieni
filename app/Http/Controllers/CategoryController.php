@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -35,10 +38,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(CategoryRequest $request)
     {
-        // Product please create model from data.
-        Category::create($this->validateData());
+        // Category model please create model vai object? from validated data.
+        Category::create($this->processRequestData($request));
 
         return redirect(route('root'));
     }
@@ -52,6 +55,8 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
+        $category = $category->toArray();
+        return view('category.show', compact('category'));
     }
 
     /**
@@ -75,9 +80,13 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        // Category please update model from validated and processed request data.
+        $category->update($this->processRequestData($request));
+
+        //Returns to edited resource
+        return redirect($category->path());
     }
 
     /**
@@ -91,27 +100,70 @@ class CategoryController extends Controller
         //
     }
 
-        /**
-     * Returns validated data
+    /**
+     * Process validated request data
+     * 
+     * @return array
      */
 
-    protected function validateData() 
+    protected function processRequestData($request) 
     {
-
-        $data = request()->validate([
-            // 'category_id' => 'required | numeric'
-            // 'featured' => 'numeric | nullable'
-            // 'price' => 'numeric | nullable'
-            // 'description' => 'string | nullable'
-            // 'image' => 'mimes:jpg,jpeg,png | image | nullable
-            'name' => 'required',
-            'arrangement' => 'numeric | nullable'
-        ]);
-
-        // Add slug
+        $request = $request->validated();
         
-        $data['slug'] = Str::slug($data['name'], '-');
-        // dd($data);
+        // Check if image key exists
+        if (array_key_exists('image', $request) && $request['image'] != null) {
+            $request = $this->processImage($request);
+        }
+        return $request;
+    }
+
+    //     /**
+    //  * Returns validated data
+    //  */
+
+    // protected function validateData() 
+    // {
+
+    //     $data = request()->validate([
+    //         // 'category_id' => 'required | numeric'
+    //         // 'featured' => 'numeric | nullable'
+    //         // 'price' => 'numeric | nullable'
+    //         // 'description' => 'string | nullable'
+    //         // 'image' => 'mimes:jpg,jpeg,png | image | nullable
+    //         'name' => 'required',
+    //         'arrangement' => 'nullable | numeric',
+    //         'description' => 'nullable | string',
+    //         'image' => 'nullable | image | mimes:jpg,jpeg,png'
+    //     ]);
+
+    //     if (array_key_exists('image', $data)) {
+    //         $data = $this->processImage($data);
+    //     }
+
+    //     return $data;
+    // }
+
+    /**
+     * Returns array with altered 'image' value;
+     * 
+     * @return array
+     */
+    protected function processImage($data) 
+    {
+        $imagePath = $data['image']->store('uploads/product', 'public');
+
+        //Fetch the image
+        $image = \Image::make(public_path("/storage/{$imagePath}"));
+
+        //Limit maximum image width to 768px, also prevent from upsizing
+        $image->widen(768, function ($constraint) {
+            $constraint->upsize();
+        });
+        $image->save();
+
+        //Merge the arrays
+        $data = array_merge($data, ['image' => $imagePath]);
+
         return $data;
     }
 }

@@ -18,12 +18,13 @@
     </header>
 
     {{-- form to edit category instance --}}
-    <form method="POST" action="{{ route('category.update', $category['id']) }}">
+    <form method="POST" action="{{ route('category.update', $category['slug']) }}" enctype="multipart/form-data">
         {{-- method to use instead of POST --}}
         @method('PUT')
         {{-- cross site request forgery --}}
         @csrf
-        {{-- todo: iespēja izvēlēties ēdienu kategorijas --}}
+        {{-- the id --}}
+        <input type="hidden" name="id" value="{{$category['id']}}">
 
         {{-- this is form input field with label --}}
         <div>
@@ -65,8 +66,34 @@
             <p>{{$errors->first('arrangement')}}</p>
             @enderror
         </div>
+        {{-- this is form input field with label --}}
+        <div>
+            <label for="image">Kategorijas bilde</label>
+            <input 
+            id="image"
+            {{-- @error directive is fired and adds danger class whenever we get error --}}
+            @error('image')
+            class="danger"
+            @enderror
+            type="file"
+            name="image"
+            {{-- provide old input incase of error --}}
+            {{-- we dont need old input for image --}}
+            {{-- value="{{old('image')}}" --}}
+            >
+
+            {{-- if error message --}}
+            @error('image')
+            <p>{{$errors->first('image')}}</p>
+            @enderror
+        </div>
+
         <button type="submit">Saglabāt izmaiņas</button>
     </form>
+
+    @isset($category['image'])
+    <img src="/storage/{{$category['image']}}" alt="">
+    @endisset
 <main>
 @endsection
 

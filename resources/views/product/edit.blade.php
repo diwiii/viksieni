@@ -145,7 +145,9 @@
         <button type="submit">Pievienot</button>
     </form>
 
+    @isset($product['image'])
     <img src="/storage/{{$product['image']}}" alt="">
+    @endisset
 
     {{-- ASIDE --}}
     {{-- Pārtulkot latviski error fieldus php un html --}}
