@@ -16,7 +16,7 @@
                 <ul>
                     @foreach($category['products'] as $product)
                         <li>
-                            {{ $product['name'] }}
+                            {{ $product['name'] }} <a href="/product/edit/{{$product['slug']}}">Edit</a>
                         </li>
                     @endforeach
                 </ul>

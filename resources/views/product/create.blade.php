@@ -20,9 +20,14 @@
         {{-- cross site request forgery --}}
         @csrf
 
+        {{-- THE SLUG ERROR --}}
+        @error('slug')
+        <p>{{$errors->first('slug')}}</p>
+        @enderror
+        
         {{-- this is form input field with label --}}
         <div>
-            <label for="category_id">Produkta iedalījums?</label>
+            <label for="category_id">Preces iedalījums?</label>
             <input 
             id="category_id"
             {{-- @error directive is fired and adds danger class whenever we get error --}}

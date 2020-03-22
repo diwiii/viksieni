@@ -7,6 +7,8 @@ use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+use App\Http\Requests\ProductRequest;
+
 class ProductController extends Controller
 {
     /**
@@ -37,13 +39,13 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(ProductRequest $request)
     {
-        // Product please create model from validated data.
-        Product::create($this->validateData());
+        // Product model please create model vai object? from validated data.
+        Product::create($this->processRequestData($request));
 
-        //Šis nosūtīs uz sākumu
-        return redirect(route('root'));
+        //Šis nosūtīs uz izveidoto resursu
+        return redirect(route('product.show', $request['slug']));
     }
 
     /**
@@ -55,6 +57,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        $product = $product->toArray();
+        return view('product.show', compact('product'));
     }
 
     /**
@@ -63,9 +67,11 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Product $product )
     {
-        //
+        // Get the categories
+        $categories = Category::all();
+        return view('product.edit', compact('categories', 'product'));
     }
 
     /**
@@ -75,9 +81,13 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        // Product please update model validated and processed request data.
+        $product->update($this->processRequestData($request));
+
+        //Returns to edited resource
+        return redirect($product->path());
     }
 
     /**
@@ -90,44 +100,41 @@ class ProductController extends Controller
     {
         //
     }
-    
+
+
     /**
-     * Returns validated data
+     * Process validated data
+     * 
+     * @return array
      */
+    protected function processData($data) {
 
-    protected function validateData() 
-    {
-
-        $data = request()->validate([
-            //'featured' => 'numeric | nullable'
-            'category_id' => 'required | numeric',
-            'name' => 'required',
-            'price' => 'numeric | nullable',
-            'description' => 'string | nullable',
-            'image' => 'mimes:jpg,jpeg,png | image | nullable'
-        ]);
-
-        // Add slug
-        $slug = Str::slug($data['name'], '-');
-        
-        // Check if slug exists
-        if(Product::where('slug', $slug)->first()) {
-            //change slug
-            $slug .= mt_rand( 0, time() );
-        }
-        
-        $data['slug'] = $slug;
-        
         // Check if image key exists
         if (array_key_exists('image', $data)) {
-            return $this->processImage($data);
+            $data = $this->processImage($data);
         }
 
         return $data;
     }
 
     /**
+     * Returns validated data
+     */
+
+    protected function processRequestData($request) 
+    {
+        $request = $request->validated();
+        // Check if image key exists
+        if (array_key_exists('image', $request)) {
+            $request = $this->processImage($request);
+        }
+        return $request;
+    }
+
+    /**
      * Returns array with altered 'image' value;
+     * 
+     * @return array
      */
     protected function processImage($data) 
     {

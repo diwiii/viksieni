@@ -29,7 +29,6 @@ class SiteController extends Controller
     
         //Get product list
         $products = Product::all()->toArray();
-    
         return view('index', compact('products','categories'));
     }
 }

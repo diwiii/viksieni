@@ -1,4 +1,8 @@
-Name or Slug must be unique or we will get errors
+SLUG VALIDATION OMG CHECK THE SLUG
+Slugiem vajag atsevišķu tabulu kura norāda uz id un id uz slugu
+
+Edit the product and category records
+
 
 Laravel composer izmanto lai izveidotu piemēram formas, lai nav manuali jātaisa blade faili katram inputam
 is kinda fixed: We have issue with AppServiceProvider and getting data from database before database is created

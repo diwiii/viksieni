@@ -1,19 +1,71 @@
 @extends('layouts.app')
 
 {{-- Title of the app or resource <title>App</title> --}}
-
-@section('title', 'Rediģēt {{ $product->name }}' ?? config('app.name'))
+@section('title', $siteName . ' - Rediģēt ' . $product['name'])
 
 @section('content')
 
-@include('site.header')
-
 {{-- Main content of the document --}}
 <main>
-    <form method="POST" action="/product" enctype="multipart/form-data">
+    <header>
+        <h1>Rediģēt {{$product['name']}}</h1>
+        {{-- iespēja izvēlēties ēdienu kategorijas --}}
+        <ul>
+            @foreach ($categories as $category)
+            <li>{{$category['name']}}, id: {{$category['id']}}</li>
+            @endforeach
+        </ul>
+    </header>
+    <form method="POST" action="{{route('product.update', $product['slug'])}}" enctype="multipart/form-data">
+
+        {{-- method to use instead of POST --}}
+        @method('PUT')
         {{-- cross site request forgery --}}
         @csrf
+        {{-- the id --}}
+        <input type="hidden" name="id" value="{{$product['id']}}">
 
+        {{-- this is form input field with label --}}
+        <div>
+            <label for="slug">url-vārds</label>
+            <input 
+            id="slug"
+            {{-- @error directive is fired and adds danger class whenever we get error --}}
+            @error('slug')
+            class="danger"
+            @enderror
+            type="text"
+            name="slug"
+            {{-- provide old input incase of error --}}
+            value="{{old('slug') ?? $product['slug']}}"
+            >
+
+            {{-- if error message --}}
+            @error('slug')
+            <p>{{$errors->first('slug')}}</p>
+            @enderror
+        </div>
+        {{-- this is form input field with label --}}
+        <div>
+            <label for="category_id">Preces iedalījums?</label>
+            <input 
+            id="category_id"
+            {{-- @error directive is fired and adds danger class whenever we get error --}}
+            @error('category_id')
+            class="danger"
+            @enderror
+            type="text"
+            name="category_id"
+            {{-- provide old input incase of error --}}
+            value="{{old('category_id') ?? $product['category_id']}}"
+            required
+            autofocus>
+
+            {{-- if error message --}}
+            @error('category_id')
+            <p>{{$errors->first('category_id')}}</p>
+            @enderror
+        </div>
         {{-- this is form input field with label --}}
         <div>
             <label for="name">Preces nosaukums</label>
@@ -26,7 +78,7 @@
             type="text"
             name="name"
             {{-- provide old input incase of error --}}
-            value="{{old('name')}}"
+            value="{{old('name') ?? $product['name']}}"
             required>
     
             {{-- if error message --}}
@@ -46,7 +98,7 @@
             type="text"
             name="price"
             {{-- provide old input incase of error --}}
-            value="{{old('price')}}">
+            value="{{old('price') ?? $product['price']}}">
     
             {{-- if error message --}}
             @error('price')
@@ -62,7 +114,7 @@
                         @enderror
                         name="description"
                         cols="30"
-                        rows="10">{{old('description') ?? ''}}</textarea>
+                        rows="10">{{old('description') ?? $product['description']}}</textarea>
     
             {{-- if error message --}}
             @error('description')
@@ -91,6 +143,8 @@
     
         <button type="submit">Pievienot</button>
     </form>
+
+    <img src="/storage/{{$product['image']}}" alt="">
 
     {{-- ASIDE --}}
     {{-- Pārtulkot latviski error fieldus php un html --}}
