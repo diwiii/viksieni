@@ -12,11 +12,23 @@
         <ul>
         @foreach($categories as $category)
             <li>
-                <a href="#{{$category['slug']}}">{{$category['name']}}</a> <a href="/category/edit/{{$category['slug']}}">Edit</a>
+                <a href="#{{$category['slug']}}">{{$category['name']}}</a>
+                <a href="/category/edit/{{$category['slug']}}">Edit</a>
+                <a href=""></a>
+                @component('delete')
+                    @slot('route')
+                    {{ route('category.destroy', $category['slug']) }}
+                    @endslot
+                @endcomponent
                 <ul>
                     @foreach($category['products'] as $product)
                         <li>
                             {{ $product['name'] }} <a href="/product/edit/{{$product['slug']}}">Edit</a>
+                            @component('delete')
+                                @slot('route')
+                                {{ route('product.destroy', $product['slug']) }}
+                                @endslot
+                            @endcomponent
                         </li>
                     @endforeach
                 </ul>

@@ -1,3 +1,5 @@
+Add upload_max_filesize to 8mb in validation or depends on server settings!!!
+
 OMG this enctype="multipart/form-data 
 Please be sure to add enctype="multipart/form-data" if form will upload image;
 

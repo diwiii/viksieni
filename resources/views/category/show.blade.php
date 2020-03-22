@@ -17,6 +17,9 @@
         </li>
         @endforeach
     </ul>
+    @isset($category['image'])
+    <img src="/storage/{{$category['image']}}" alt="">
+    @endisset
 </main>
 
 @endsection

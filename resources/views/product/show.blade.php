@@ -17,6 +17,9 @@
         </li>
         @endforeach
     </ul>
+    @isset($product['image'])
+    <img src="/storage/{{$product['image']}}" alt="">
+    @endisset
 </main>
 
 @endsection

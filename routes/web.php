@@ -48,6 +48,7 @@ Route::get('/category/{category}', 'CategoryController@show')->name('category.sh
 Route::put('/category/{category}', 'CategoryController@update')->name('category.update')->middleware('auth');
 
 Route::delete('/category/{category}', 'CategoryController@destroy')->name('category.destroy')->middleware('auth');
+Route::delete('/product/{product}', 'ProductController@destroy')->name('product.destroy')->middleware('auth');
 
 
 Route::get('/{product}', 'ProductController@show')->name('product.show');

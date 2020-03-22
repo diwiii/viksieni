@@ -98,6 +98,9 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+        $category->delete();
+
+        return redirect(route('root'));
     }
 
     /**
@@ -117,32 +120,6 @@ class CategoryController extends Controller
         return $request;
     }
 
-    //     /**
-    //  * Returns validated data
-    //  */
-
-    // protected function validateData() 
-    // {
-
-    //     $data = request()->validate([
-    //         // 'category_id' => 'required | numeric'
-    //         // 'featured' => 'numeric | nullable'
-    //         // 'price' => 'numeric | nullable'
-    //         // 'description' => 'string | nullable'
-    //         // 'image' => 'mimes:jpg,jpeg,png | image | nullable
-    //         'name' => 'required',
-    //         'arrangement' => 'nullable | numeric',
-    //         'description' => 'nullable | string',
-    //         'image' => 'nullable | image | mimes:jpg,jpeg,png'
-    //     ]);
-
-    //     if (array_key_exists('image', $data)) {
-    //         $data = $this->processImage($data);
-    //     }
-
-    //     return $data;
-    // }
-
     /**
      * Returns array with altered 'image' value;
      * 
@@ -150,7 +127,7 @@ class CategoryController extends Controller
      */
     protected function processImage($data) 
     {
-        $imagePath = $data['image']->store('uploads/product', 'public');
+        $imagePath = $data['image']->store('uploads/category', 'public');
 
         //Fetch the image
         $image = \Image::make(public_path("/storage/{$imagePath}"));
