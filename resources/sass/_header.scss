@@ -1,0 +1,119 @@
+header {
+    text-align: center;
+    font-size: $smFontSizeP;
+
+    h1 {
+        font-size: $smFontSizeH1;
+    }
+    
+    p {
+        font-size: $smFontSizeP;
+    }
+    a:link,
+    a:active,
+    a:focus,
+    a:hover,
+    a:visited {
+    font-size: $smFontSizeP;
+    //color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    }
+}
+
+@include media-md {
+    header {
+        font-size: $mdFontSizeP;
+        
+        h1 {
+            font-size: $mdFontSizeH1;
+        }
+
+        p {
+            font-size: $mdFontSizeP;
+        }
+        
+        a:link,
+        a:active,
+        a:focus,
+        a:hover,
+        a:visited {
+        font-size: $mdFontSizeP;
+        //color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        }
+    }
+}
+
+.usual-header {
+    //Is this default flex row??
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    > * {            
+        flex: 1 1 auto; //This is flex item default;
+        margin: 1rem; //This must be assigned somewhere else;
+    }
+
+    // Quick fix, I want better solution
+    figure div, .description {
+        margin: 0;
+    }
+}
+
+.small-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    > * {            
+        flex: 1 1 auto; //This is flex item default;
+
+        margin: 0.5rem;
+    }
+
+    figure {
+        //min-width: 100px;
+    }
+
+    .description {
+        font-size: 0.5rem;
+    }
+
+    nav {
+        width: 100%; // FOR THE IE11
+
+        ul {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            > * {            
+                flex: 1 1 auto; //This is flex item default;
+            }
+        }
+
+        .button {
+            padding: 0.1rem;
+            margin: 0.1rem;
+        }
+    }
+}
+
+@include media-md {
+    .small-header {
+        padding: 0 25%;
+        
+        .description {
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+    }
+}

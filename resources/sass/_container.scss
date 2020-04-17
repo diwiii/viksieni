@@ -1,0 +1,43 @@
+// Classes for sections and header
+// Maybe this file should be named Containers
+
+
+.container {
+    // margin: auto;
+     padding: 0 1rem;
+     width: 100%;
+     max-width: 1024px;
+}
+
+.section-container {
+    margin: auto;
+    max-width: 1024px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: nowrap;
+
+    > * {
+        margin: 1rem;
+    }
+}
+
+@include media-md {
+
+    .section-container {
+        min-height: 50vh;
+        flex-direction: row;
+
+        > * {
+            
+            //max-width: 600px;
+            //flex: 0 0 50%;
+        }
+    }
+
+    .container {
+        max-width: 1024px;
+    }
+}

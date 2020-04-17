@@ -68,6 +68,44 @@
         </div>
         {{-- this is form input field with label --}}
         <div>
+            <label for="description">Apraksts</label>
+            <input 
+            id="description"
+            {{-- @error directive is fired and adds danger class whenever we get error --}}
+            @error('description')
+            class="danger"
+            @enderror
+            type="text"
+            name="description"
+            {{-- provide old input incase of error --}}
+            value="{{old('description') ?? $category['description']}}">
+    
+            {{-- if error message --}}
+            @error('description')
+            <p>{{$errors->first('description')}}</p>
+            @enderror
+        </div>
+        {{-- this is form input field with label --}}
+        <div>
+            <label for="accent_color">Krāsa</label>
+            <input 
+            id="accent_color"
+            {{-- @error directive is fired and adds danger class whenever we get error --}}
+            @error('accent_color')
+            class="danger"
+            @enderror
+            type="text"
+            name="accent_color"
+            {{-- provide old input incase of error --}}
+            value="{{old('accent_color') ?? $category['accent_color']}}">
+    
+            {{-- if error message --}}
+            @error('accent_color')
+            <p>{{$errors->first('accent_color')}}</p>
+            @enderror
+        </div>
+        {{-- this is form input field with label --}}
+        <div>
             <label for="image">Kategorijas bilde</label>
             <input 
             id="image"

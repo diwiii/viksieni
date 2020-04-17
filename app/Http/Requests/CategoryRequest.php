@@ -32,6 +32,7 @@ class CategoryRequest extends FormRequest
             'name' => 'required',
             'arrangement' => 'nullable | numeric',
             'description' => 'nullable | string',
+            'accent_color' => 'nullable | string',
             'image' => 'nullable | mimes:jpg,jpeg,png | image'
         ];
     }

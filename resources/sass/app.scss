@@ -1,8 +1,172 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
 @import 'variables';
+@import 'standart/mediaQueries';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import 'config';
+@import 'flexbox';
+
+@import 'header';
+@import 'utilities'; //Vai drīkst būt zem header?
+
+@import 'main-nav';
+@import 'container';
+
+
+//Find where to store this kind of code, maybe here?
+// IMO this code loads last and is most important
+
+.list {
+    text-align: center;
+
+    h2 {
+        font-size: $smFontSizeH2;
+    }
+
+    li {
+        //Is this default flex COLUMN ??
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        > * {            
+            flex: 1 1 auto; //This is flex item default;
+            margin: 1rem; //This must be assigned somewhere else;
+        }
+    }
+}
+
+// .list media queries
+@media screen and (min-width: 640px) {
+    .list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: baseline;
+        flex-wrap: wrap;
+
+        > * {            
+            flex: 1 1 auto; //This is flex item default;
+            margin: 1rem; //This must be assigned somewhere else;
+        }
+
+        li {
+            h2, p {
+                margin: 0.5rem;
+            }
+            .description {
+                max-width: 320px;
+            }
+        }
+    }
+}
+
+// Flip flop by default is column and 100vh
+// We flip from row to column or vice versa based on screen
+// We also change height of this container 50vh or 100vh based on screen
+.flip-flop {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    align-items: stretch; // IE11 need this so the flexbox items do not overflow;
+
+
+    & .media, & .content {
+        max-width: 768px;
+    }
+
+    // IE wants 100% width for the img to shrink or grow
+    .media img {
+        width: 100%;
+    }
+}
+
+.flip-flop > * {
+    flex: 1 1 auto;
+    margin: 1rem;
+}
+
+// flip-flop media queries
+@include media-md {
+    .flip-flop {
+        min-height: 50vh;
+        flex-direction: row;
+    
+        .media {
+            flex: 1 1 50%;
+            align-self: center;
+        }
+        .content {
+            flex: 1 1 50%;
+            align-self: center;
+        }
+    }
+}
+// .media {
+
+// }
+.content {
+    text-align: justify;
+    font-size: $smFontSizeP;
+
+    p {
+        text-indent: 1rem;
+    }
+}
+
+@include media-md {
+    .content {
+        font-size: $mdFontSizeP;
+
+        h1 {
+            font-size: $mdFontSizeH1;
+        }
+    }
+}
+//Lieks, laikam?
+.section-body {
+    text-align: justify;
+    font-size: 1.2rem;
+}
+
+.logo {
+    img {
+        display: inline;
+    }
+}
+
+// At the moment this class is for section > header > navigation
+.title-nav {
+    //border-bottom: 1px solid $orange2;
+    a, h1 {
+        padding: 0 0.5rem;
+        color: inherit;
+        width: 100%;
+    }
+
+    a {
+        font-size: 1rem;
+    }
+}
+.product-nav {
+    // max-width: inherit;
+    max-width: 300px;
+    margin: auto;
+    overflow: auto;
+    // white-space: nowrap;
+}
+
+// Fix logo width on ie on under 320px screen
+@media screen and (max-width: 319px) {
+    .ieFIXwidth {
+        max-width: 200px;
+    }
+}
+
+// Fix img stretch on ie
+.ieFIXgrowShrink0 {
+    -webkit-box-flex: 0;
+    -ms-flex-positive: 0;
+    -ms-flex-negative: 0;
+}

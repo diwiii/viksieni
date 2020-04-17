@@ -1,0 +1,155 @@
+//@import 'standart/mediaQueries';
+
+// We have Utility classes here
+// Atkārtoti izmantojamas klases -> Utilities
+
+// Backgrounds
+.bg {
+    &-orange {
+        //use #{} interpolation to not compile quotes 
+        background: #{map-get($gradient-colors, 'orange' )};
+        color: #fff;
+    }
+    &-orange2 {
+        //use #{} interpolation to not compile quotes 
+        background: #{map-get($gradient-colors, 'orange2' )};
+        color: #fff;
+    }
+    &-tirkizs {
+        //use #{} interpolation to not compile quotes 
+        background: $tirkizs;
+        color: #fff;
+    }
+    &-yellow {
+        //use #{} interpolation to not compile quotes 
+        background: #{map-get($gradient-colors, 'yellow' )};
+        color: $red;
+    }
+    &-green {
+        //use #{} interpolation to not compile quotes 
+        background: #{map-get($gradient-colors, 'green' )};
+        color: $light;
+    }
+    &-red {
+        //use #{} interpolation to not compile quotes 
+        background: #{map-get($gradient-colors, 'red' )};
+        color: $light;
+    }
+}
+
+.orange {
+    color: $orange2;
+    border-color: $orange2;
+}
+.red {
+    color: $red;
+    border-color: $red;
+}
+.green {
+    color: $green;
+    border-color: $green;
+}
+.green2 {
+    color: $green2;
+    border-color: $green2;
+}
+
+.border {
+    &-px5 {
+        border: 5px solid;
+    }
+    &-px15 {
+        border: 15px solid;
+    }
+}
+
+// Width or Height
+.vh{
+    &100 {
+        min-height: 100vh;
+    }
+}
+
+.width100 {
+    width:100%;
+}
+.maxWidth {
+    &1024 {
+        max-width: 1024px; 
+        margin:auto;   
+    }
+    &768 {
+        max-width: 768px; 
+        margin:auto;   
+    }
+    &512 {
+        max-width: 512px; 
+        margin:auto;   
+    }
+    &128 {
+        max-width: 128px; 
+        margin:auto;   
+    }
+}
+
+
+.marginBottom {
+    &-px15 {
+        margin-bottom: 15px;
+    }
+}
+.margin {
+    margin: 1rem;
+}
+
+// The text align
+.align {
+    &-center {
+        text-align: center;
+    }
+    &-right {
+        text-align: right;
+    }
+    &-left {
+        text-align: left;
+    }
+}
+.justify {
+    text-align: justify;
+}
+.indent {
+    text-indent: 1rem;
+}
+
+// Shadow
+.box-shadow { 
+    position: relative;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.45);
+}
+
+// Button 
+.button {
+    display: block;
+    cursor: pointer;
+    border: 1px solid;
+   // border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0.5rem;
+
+    &.green {
+        color: $green2;
+    }
+    &.bg-green {
+        background: $green;
+    }
+}
+
+// Media queries
+
+
+@include media-md {
+    // Sadalam uz pusēm? visdrīzāk jādara savādāk
+    .vh100 {
+        min-height: 50vh;
+    }
+}

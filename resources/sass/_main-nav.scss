@@ -1,0 +1,10 @@
+// Main Nav
+
+@media screen and (min-width: 480px)
+ {
+    .main-nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

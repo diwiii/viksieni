@@ -9,7 +9,9 @@
     {{-- This is nav in the header section of the body --}}
     @section('content-nav')
     @parent
-        <ul>
+
+    {{-- Šis ir paraugs --}}
+        {{-- <ul>
         @foreach($categories as $category)
             <li>
                 <a href="#{{$category['slug']}}">{{$category['name']}}</a>
@@ -34,19 +36,88 @@
                 </ul>
             </li>
         @endforeach
-        </ul>
+        </ul> --}}
     @endsection
 
 {{-- Main content of the document --}}
 <main>
-@foreach($products as $product)
-    <section id="{{$product['slug']}}">
-        {{-- Header of the section --}}
+
+@foreach($categories as $category)
+    @if($category['id'] === 5)
+
+    <!-- Section of the main content -->
+    <section class="bg-{{$category['accent_color']}} flip-flop">
+        <!-- Media of the section -->
+        <figure class="media">
+            <img
+                srcset="img/zemenu-smilts-sirups-480w.jpeg 480w,
+                        img/zemenu-smilts-sirups-768w.jpeg 768w"
+                sizes="(max-width: 580px) 480px,
+                        768px"
+                src="img/zemenu-smilts-sirups-768w.jpeg"
+
+                alt="Daudz, gatavas Smiltsērkšķu eļļas pudelītes."
+                title="Smiltsērkšķu eļļa"
+
+                class="border-px15 orange"
+            >
+        </figure>
+        <div class="content">
+            <!-- Header of the section -->
+            <header>
+                <!-- Title of the section -->
+                <h1>{{$category['name']}}</h1>
+            </header>
+            <p>
+                {{$category['description']}}
+            </p>
+        </div>
+    </section>
+     
+    @endif
+@endforeach
+
+
+@foreach($categories as $category)
+<!-- Section of the main content -->
+<section class="bg-yellow flip-flop">
+    <!-- Media of the section -->
+    <figure class="media">
+        <img
+            srcset="img/zemenu-smilts-sirups-480w.jpeg 480w,
+                    img/zemenu-smilts-sirups-768w.jpeg 768w"
+            sizes="(max-width: 580px) 480px,
+                    768px"
+            src="img/zemenu-smilts-sirups-768w.jpeg"
+
+            alt="Daudz, gatavas Smiltsērkšķu eļļas pudelītes."
+            title="Smiltsērkšķu eļļa"
+
+            class="border-px15 orange"
+        >
+    </figure>
+    <div class="content">
+        <!-- Header of the section -->
         <header>
-            {{-- Title of the section --}}
+            <!-- Title of the section -->
+            <h1>{{$category['name']}}</h1>
+        </header>
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur laborum voluptatem fuga. Ipsum ducimus sequi dolores amet dolorum qui cumque? Reiciendis explicabo soluta reprehenderit rem. Dolorem ipsa beatae culpa quidem!
+        </p>
+    </div>
+</section>
+@endforeach
+
+{{-- Šis ir paraugs produktu listingam --}}
+{{-- @foreach($products as $product)
+    <section id="{{$product['slug']}}">
+        <!-- Header of the section -->
+        <header>
+            <!-- Title of the section -->
             <h1>{{$product['name']}}</h1>
             <nav>
-                {{-- List of navigation items --}}
+                <!-- List of navigation items -->
                 <ul>
                     <li>
                         <a href="#!">To the top</a>
@@ -56,7 +127,7 @@
         </header>
         <p>{{$product['description']}}</p>
     </section>
-@endforeach
+@endforeach --}}
 </main>
 
 @endsection

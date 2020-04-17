@@ -1,19 +1,37 @@
-// Body
-$body-bg: #f8fafc;
+// Variables
+$orange: #FF6E1D;
+$orange2: #993300;
+$yellow: #fcb70a;
+$yellow2: #585816;
+$red: #642b22;
+$tirkizs: #2E5E65;
+$green: #8ac05f;
+$green2: #152b04;
+$dark: #231f1c;
+$dark2: #241206;
+$light: #F4F5F5;
+$light2: rgb(255, 234, 220);
+$gray: rgba($color: #000000, $alpha: 0.1);
 
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+// Color
+$primary-color: $orange2;
 
-// Colors
-$blue: #3490dc;
-$indigo: #6574cd;
-$purple: #9561e2;
-$pink: #f66d9b;
-$red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
-$green: #38c172;
-$teal: #4dc0b5;
-$cyan: #6cb2eb;
+
+// Maps
+$gradient-colors: (
+    'orange' : 'radial-gradient(66.72% 853.42% at 95.94% 15.63%, rgba(255, 111, 8, 0.95) 0%, rgba(153, 51, 0, 0.95) 60.83%)',
+    'orange2' : 'radial-gradient(72.64% 100% at 33.91% 0%, #FF6F08 0%, #993300 100%)',
+    'yellow' : 'radial-gradient(72.64% 100% at 33.91% 0%, #FCB70A 0%, #FC610A 100%)',
+    'green' : 'radial-gradient(72.64% 100% at 33.91% 0%, #A7E269 0%, #368034 100%)',
+    'red' : 'radial-gradient(72.64% 100% at 33.91% 0%, #E72C43 0%, #85212D 100%)'
+);
+
+// Font Size
+
+$smFontSizeP: 1.2rem;
+$smFontSizeH1: 2.5rem;
+$smFontSizeH2: 1.8rem;
+
+$mdFontSizeP: 1.5rem;
+$mdFontSizeH1: 3.5rem;
+$mdFontSizeH2: 2.8rem;
