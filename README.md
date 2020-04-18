@@ -1,3 +1,5 @@
+TODO: Slugs need their own table which are assigned to ids
+
 Please add option: when uploading image ask for image description and insert it as alt atribute on img tag
 
 Add upload_max_filesize to 8mb in validation or depends on server settings!!!

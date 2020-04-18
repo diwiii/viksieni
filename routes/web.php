@@ -43,14 +43,23 @@ Route::get('/product/create', 'ProductController@create')->name('product.create'
 Route::get('/product/edit/{product}', 'ProductController@edit')->name('product.edit')->middleware('auth');
 Route::put('/product/{product}', 'ProductController@update')->name('product.update')->middleware('auth');
 
+//Category
 Route::get('/category', 'CategoryController@index')->name('category.index');
 Route::post('/category', 'CategoryController@store')->name('category.store')->middleware('auth');
 Route::get('/category/create', 'CategoryController@create')->name('category.create')->middleware('auth');
 Route::get('/category/edit/{category}', 'CategoryController@edit')->name('category.edit')->middleware('auth');
 Route::get('/category/{category}', 'CategoryController@show')->name('category.show');
 Route::put('/category/{category}', 'CategoryController@update')->name('category.update')->middleware('auth');
-
 Route::delete('/category/{category}', 'CategoryController@destroy')->name('category.destroy')->middleware('auth');
+//Section
+Route::get('/section', 'SectionController@index')->name('section.index');
+Route::post('/section', 'SectionController@store')->name('section.store')->middleware('auth');
+Route::get('/section/create', 'SectionController@create')->name('section.create')->middleware('auth');
+Route::get('/section/edit/{section}', 'SectionController@edit')->name('section.edit')->middleware('auth');
+Route::get('/section/{section}', 'SectionController@show')->name('section.show');
+Route::put('/section/{section}', 'SectionController@update')->name('section.update')->middleware('auth');
+Route::delete('/section/{section}', 'SectionController@destroy')->name('section.destroy')->middleware('auth');
+
 Route::delete('/product/{product}', 'ProductController@destroy')->name('product.destroy')->middleware('auth');
 
 

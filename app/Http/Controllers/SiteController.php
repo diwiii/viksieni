@@ -27,7 +27,7 @@ class SiteController extends Controller
                 $category->products;
             }
         $categories = $categories->toArray();
-        
+        //dd($categories);
         // $category = Category::all()->toArray();
     
         //Get product list

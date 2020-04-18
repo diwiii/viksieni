@@ -2,12 +2,13 @@
 
 namespace App\Http\Requests;
 
-use App\Category;
+use App\Section;
+
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
-class CategoryRequest extends FormRequest
+class SectionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,10 +29,11 @@ class CategoryRequest extends FormRequest
     {
         return [
             //
-            'slug' => Rule::unique('products')->ignore($this->id), // Šis ir nepareizs, tiek pārbaudīta tikai productu slugu tabula
+            'slug' => Rule::unique('products')->ignore($this->id), // Šis ir nepareizs
             'name' => 'required',
             'arrangement' => 'nullable | numeric',
             'description' => 'nullable | string',
+            'content' => 'nullable | string',
             'accent_color' => 'nullable | string',
             'image' => 'nullable | mimes:jpg,jpeg,png | image'
         ];
@@ -66,11 +68,11 @@ class CategoryRequest extends FormRequest
             $slug = Str::slug($this->name, '-');
         }
         // Check if slug exists in database and assign to variable
-        $category = Category::where('slug', $slug)->first();
+        $section = Section::where('slug', $slug)->first();
         // If slug exists
-        if($category) {
-            // And request id is not equal to category id
-            if ($category->id != $this->id ) {
+        if($section) {
+            // And request id is not equal to section id
+            if ($section->id != $this->id ) {
                 //Change slug
                 $slug = $slug . mt_rand( 0, time() );
             }
