@@ -42,7 +42,9 @@ class AppServiceProvider extends ServiceProvider
             if($site) {
                 $site = [
                     'siteName' => $site->name, 
-                    'siteDescription' => $site->description
+                    'siteDescription' => $site->description,
+                    'siteLogo' => $site->logo_img,
+                    'siteLogoDescription' => $site->img_description
                 ];
                 return $site;
             }

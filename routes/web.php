@@ -33,6 +33,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // App root
 Route::get('/', 'SiteController@index')->name('root');
+// App config, PLEASE DISABLE ON PRODUCTION;
+Route::get('/site/edit/{site}', 'SiteController@edit')->name('site.edit')->middleware('auth');
+Route::put('/site/{site}', 'SiteController@update')->name('site.update')->middleware('auth');
 
 Route::post('/product', 'ProductController@store')->middleware('auth');
 Route::get('/product/create', 'ProductController@create')->name('product.create')->middleware('auth');

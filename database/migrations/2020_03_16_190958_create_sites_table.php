@@ -17,10 +17,12 @@ class CreateSitesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->string('logo_img')->nullable();
+            $table->string('img_description')->nullable();
             $table->string('info_phone')->nullable();
             $table->string('info_email')->nullable();
             $table->string('info_location')->nullable();
-            $table->text('info_details')->nullable();
+            $table->string('info_details')->nullable();
             $table->timestamps();
         });
     }
