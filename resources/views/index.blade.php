@@ -42,11 +42,9 @@
 {{-- Main content of the document --}}
 <main>
 
-@foreach($categories as $category)
-    @if($category['id'] === 5)
-
+@foreach($sections as $section)
     <!-- Section of the main content -->
-    <section class="bg-{{$category['accent_color']}} flip-flop">
+    <section class="bg-{{$section['accent_color'] ?? 'yellow'}} flip-flop">
         <!-- Media of the section -->
         <figure class="media">
             <img
@@ -66,15 +64,19 @@
             <!-- Header of the section -->
             <header>
                 <!-- Title of the section -->
-                <h1>{{$category['name']}}</h1>
+                <h1>{{$section['name']}}</h1>
+                <p>{{$section['description']}}</p>
             </header>
             <p>
-                {{$category['description']}}
+                {{$section['content']}}
             </p>
+            
+            {{-- TEMP, please add better way of doing this --}}
+            @if($section['name'] === 'Sīrupi')
+            <a href="#sirupi" class="button red align-right">Apskatīties sīrupus</a>
+            @endif
         </div>
     </section>
-     
-    @endif
 @endforeach
 
 

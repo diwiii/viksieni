@@ -28,6 +28,26 @@
 
         {{-- this is form input field with label --}}
         <div>
+            <label for="slug">url-vārds</label>
+            <input 
+            id="slug"
+            {{-- @error directive is fired and adds danger class whenever we get error --}}
+            @error('slug')
+            class="danger"
+            @enderror
+            type="text"
+            name="slug"
+            {{-- provide old input incase of error --}}
+            value="{{old('slug') ?? $section['slug']}}"
+            >
+
+            {{-- if error message --}}
+            @error('slug')
+            <p>{{$errors->first('slug')}}</p>
+            @enderror
+        </div>
+        {{-- this is form input field with label --}}
+        <div>
             <label for="name">Section nosaukums</label>
             <input 
             id="name"

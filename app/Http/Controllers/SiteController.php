@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use \App\Product;
 use \App\Category;
+use \App\Section;
 use \App\Site;
 
 use \App\Http\Requests\SiteRequest;
@@ -23,16 +24,30 @@ class SiteController extends Controller
 
         // Get category list
         $categories = Category::orderBy('arrangement', 'asc')->get();
-            foreach ($categories as $category) {
-                $category->products;
-            }
+        // $categories = Category::whereIn('id', [1,5])->get()->toArray();
+        // Get sections list
+    
+        //We do this so the products are accessible in $categories array
+        foreach ($categories as $category) {
+            $category->products;
+        }
+
+        $sections = Section::all()->toArray();
         $categories = $categories->toArray();
+
+        // Create sections array from $categories and $sections
+        // $sections = array_merge($categories, $sections);
+
+
+        // dd($sections);
+        // dd($categories->only([1,5]));
+            
         //dd($categories);
         // $category = Category::all()->toArray();
     
         //Get product list
         $products = Product::all()->toArray();
-        return view('index', compact('products','categories'));
+        return view('index', compact('products','categories', 'sections'));
     }
 
     /**

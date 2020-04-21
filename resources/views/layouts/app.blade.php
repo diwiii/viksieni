@@ -32,7 +32,9 @@
     <header id="root" class="bg-green vh100 flexbox column stretchX">      
         <!-- Logo -->
         <figure id="logo" class="flexbox column stretchX">
-            <img class="item-center maxWidth512 width100 ieFIXgrowShrink0 ieFIXwidth" src="/storage/{{$siteLogo}}" alt="{{$siteLogoDescription}}" title="Viksieni">
+            <a href="{{route('root')}}">
+                <img class="item-center maxWidth512 width100 ieFIXgrowShrink0 ieFIXwidth" src="/storage/{{$siteLogo}}" alt="{{$siteLogoDescription}}" title="Viksieni">
+            </a>
             <div class="flexbox row">
                 <!-- Title of the document -->
                 <h1 style="display: none;">{{ $siteName ?? config('app.name')}}</h1><!-- Because we have .svg logo title -->
