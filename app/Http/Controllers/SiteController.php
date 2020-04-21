@@ -32,8 +32,13 @@ class SiteController extends Controller
             $category->products;
         }
 
-        $sections = Section::all()->toArray();
+        $sections = Section::all();
+        foreach($sections as $section) {
+            $section->image = $section->getImage();
+        }
+
         $categories = $categories->toArray();
+        $sections = $sections->toArray();
 
         // Create sections array from $categories and $sections
         // $sections = array_merge($categories, $sections);
@@ -105,7 +110,7 @@ class SiteController extends Controller
     protected function processImage($data) 
     {
         // Store the image
-        $imagePath = $data['logo_img']->store('uploads/category', 'public');
+        $imagePath = $data['logo_img']->store('uploads/site', 'public');
 
         // If the img is svg skip ImageIntervention
         if ($data['logo_img']->getMimeType() === 'image/svg') {

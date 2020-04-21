@@ -28,4 +28,15 @@ class Section extends Model
     public function path() {
         return route('section.show', $this);
     }
+
+    /**
+     * Return array of single image different size paths
+     */
+    public function getImage() {
+        
+        $imagePath[0] = "/storage/uploads/section/".$this->image;
+        $imagePath[768] = "/storage/uploads/section/768/".$this->image;
+        $imagePath[480] = "/storage/uploads/section/480/".$this->image;
+        return $imagePath;
+    }
 }

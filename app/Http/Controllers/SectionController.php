@@ -126,19 +126,53 @@ class SectionController extends Controller
      */
     protected function processImage($data) 
     {
+        // Generate image name from slug and date
+        // $imageName = $data['slug']."-".date("d-m-y-his");
+        
+
+        // Store image as $imageName
+        // $imagePath = $data['image']->storeAs('uploads/section', $imageName);
+
+
+        // Store uploaded image
         $imagePath = $data['image']->store('uploads/section', 'public');
 
         //Fetch the image
         $image = \Image::make(public_path("/storage/{$imagePath}"));
 
-        //Limit maximum image width to 768px, also prevent from upsizing
-        $image->widen(768, function ($constraint) {
+        // Get image name which will be saved in database
+        $imageName = $image->basename;
+        
+        // Save image name
+        $data = array_merge($data, ['image' => $imageName]);
+
+        //EDIT THE IMAGE SIZES
+
+        //TODO if we dont have folders 768 and 480 please create them, else we get errors.
+
+        // Limit maximum image width to 1024px, also prevent from upsizing
+        $image->widen(1024, function ($constraint) {
             $constraint->upsize();
         });
         $image->save();
 
-        //Merge the arrays
-        $data = array_merge($data, ['image' => $imagePath]);
+        //Fetch the image
+        $image = \Image::make(public_path("/storage/{$imagePath}"));
+        //Limit maximum image width to 768px, also prevent from upsizing
+        $image->widen(768, function ($constraint) {
+            $constraint->upsize();
+        });
+        $image->save($image->dirname."/768/".$image->basename);
+        
+        //Fetch the image
+        $image = \Image::make(public_path("/storage/{$imagePath}"));
+        //Limit maximum image width to 480px, also prevent from upsizing
+        $image->widen(480, function ($constraint) {
+            $constraint->upsize();
+        });
+        $image->save($image->dirname."/480/".$image->basename);
+
+        
 
         return $data;
     }

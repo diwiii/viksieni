@@ -48,11 +48,17 @@
         <!-- Media of the section -->
         <figure class="media">
             <img
-                srcset="img/zemenu-smilts-sirups-480w.jpeg 480w,
-                        img/zemenu-smilts-sirups-768w.jpeg 768w"
+                {{-- PSEUDO --}}
+                {{-- "category/img/768/name-768.jpeg" --}}
+                {{-- "category/img/480/name-480.jpeg" --}}
+    
+                srcset="{{$section['image'][480]}} 480w,
+                        {{$section['image'][768]}} 768w"
                 sizes="(max-width: 580px) 480px,
                         768px"
-                src="img/zemenu-smilts-sirups-768w.jpeg"
+
+                {{-- this is default --}}
+                src="{{$section['image'][0]}}"
 
                 alt="Daudz, gatavas Smiltsērkšķu eļļas pudelītes."
                 title="Smiltsērkšķu eļļa"
