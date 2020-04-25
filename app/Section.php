@@ -12,7 +12,7 @@ class Section extends Model
      * @var array
      * 
      */
-    protected $fillable = [ 'slug', 'name', 'arrangement', 'image', 'description', 'accent_color', 'content' ];
+    protected $fillable = [ 'slug', 'name', 'arrangement', 'image_id', 'description', 'accent_color', 'content' ];
 
     /**
      * Atrod Modeli pēc slug colonas , default ir pēc primaryKey tas ir ID
@@ -28,15 +28,11 @@ class Section extends Model
     public function path() {
         return route('section.show', $this);
     }
-
-    /**
-     * Return array of single image different size paths
-     */
-    public function getImage() {
-        
-        $imagePath[0] = "/storage/uploads/section/".$this->image;
-        $imagePath[768] = "/storage/uploads/section/768/".$this->image;
-        $imagePath[480] = "/storage/uploads/section/480/".$this->image;
-        return $imagePath;
+    
+    // Get the image
+    // How about default values if nothing is returned?
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
     }
 }

@@ -21,7 +21,7 @@ class Category extends Model
      */
     public function products() {
         //vajag pamēģināt arī hasMany(Product::class) 
-        return $this->hasMany(Product::class, 'category_id'); // select * from dishes where category_id = 
+        return $this->hasMany(Product::class, 'category_id'); // select * from products where category_id = 
     }
 
     /**

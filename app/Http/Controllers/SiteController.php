@@ -25,34 +25,42 @@ class SiteController extends Controller
         // Get category list
         $categories = Category::orderBy('arrangement', 'asc')->get();
         // $categories = Category::whereIn('id', [1,5])->get()->toArray();
-        // Get sections list
     
         //We do this so the products are accessible in $categories array
+        // THERE IS BETTER WAY -> eager loading 
         foreach ($categories as $category) {
             $category->products;
         }
-
-        $sections = Section::all();
-        foreach($sections as $section) {
-            $section->image = $section->getImage();
-        }
-
+        // Set categories collection to Array
         $categories = $categories->toArray();
+
+        // Get Sections from database with image table
+        $sections = Section::with('image')->get();
+
+        // Map into sections to sanitize Image size collection
+        $sections = $sections->map(function($section){
+            
+            // This is section image
+            $image = $section->image;
+
+            // If we have image model associated with section
+            if($image) {
+                // Tap into sizes model which is associated with image model
+                // Add imageSize array to $section
+                $section['imageSize'] = $image->sizes->mapWithKeys(function($size){
+                    return [$size->width => $size->url];
+                });
+            }
+            return $section;
+        });
+
+        // Set sections collection to array
         $sections = $sections->toArray();
 
-        // Create sections array from $categories and $sections
-        // $sections = array_merge($categories, $sections);
-
-
-        // dd($sections);
-        // dd($categories->only([1,5]));
-            
-        //dd($categories);
-        // $category = Category::all()->toArray();
-    
         //Get product list
-        $products = Product::all()->toArray();
-        return view('index', compact('products','categories', 'sections'));
+        // $products = Product::all()->toArray();
+
+        return view('index', compact('categories', 'sections'));
     }
 
     /**

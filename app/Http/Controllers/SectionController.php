@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Section;
+use App\Image;
 use App\Http\Requests\SectionRequest;
 
 use Illuminate\Http\Request; // Šo vajag?
@@ -120,7 +121,9 @@ class SectionController extends Controller
     }
 
     /**
-     * Returns array with altered 'image' value;
+     * Returns array with altered 'image' value, 
+     * Returns array with additional key -> image_id
+     * 
      * 
      * @return array
      */
@@ -134,8 +137,10 @@ class SectionController extends Controller
         // $imagePath = $data['image']->storeAs('uploads/section', $imageName);
 
 
-        // Store uploaded image
-        $imagePath = $data['image']->store('uploads/section', 'public');
+        // Store uploaded image , atm will store in images folder
+        $imagePath = $data['image']->store('uploads/images', 'public');
+
+        // Keep in mind that "Image" and "\Image" are two different things
 
         //Fetch the image
         $image = \Image::make(public_path("/storage/{$imagePath}"));
@@ -143,8 +148,29 @@ class SectionController extends Controller
         // Get image name which will be saved in database
         $imageName = $image->basename;
         
-        // Save image name
-        $data = array_merge($data, ['image' => $imageName]);
+        // Create new record
+        $imageRow = new Image;
+        $imageRow = $imageRow->create(['url'=>$imageName]);
+        // Create 2 sizes record;
+        $imageRow->sizes()->createMany([
+
+            [
+            'width'=>768,
+            'url'=>'768/'.$imageName
+            ],
+
+            [
+            'width'=>480,
+            'url'=>'480/'.$imageName
+            ]
+
+        ]);
+
+        // Save image name and image_id back to array
+        $data = array_merge($data, [
+            'image' => $imageName,
+            'image_id' => $imageRow->id
+        ]);
 
         //EDIT THE IMAGE SIZES
 

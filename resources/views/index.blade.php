@@ -41,24 +41,25 @@
 
 {{-- Main content of the document --}}
 <main>
-
 @foreach($sections as $section)
     <!-- Section of the main content -->
     <section class="bg-{{$section['accent_color'] ?? 'yellow'}} flip-flop">
         <!-- Media of the section -->
+        @isset($section['image'])
         <figure class="media">
             <img
-                {{-- PSEUDO --}}
-                {{-- "category/img/768/name-768.jpeg" --}}
-                {{-- "category/img/480/name-480.jpeg" --}}
-    
-                srcset="{{$section['image'][480]}} 480w,
-                        {{$section['image'][768]}} 768w"
+                
+                {{--  If we have image sizes--}}
+                @if(!empty($section['imageSize']))
+
+                srcset="/storage/uploads/images/{{$section['imageSize'][480]}} 480w,
+                        /storage/uploads/images/{{$section['imageSize'][768]}} 768w"
                 sizes="(max-width: 580px) 480px,
                         768px"
 
+                @endif
                 {{-- this is default --}}
-                src="{{$section['image'][0]}}"
+                src="/storage/uploads/images/{{$section['image']['url']}}"
 
                 alt="Daudz, gatavas Smiltsērkšķu eļļas pudelītes."
                 title="Smiltsērkšķu eļļa"
@@ -66,6 +67,7 @@
                 class="border-px15 orange"
             >
         </figure>
+        @endisset
         <div class="content">
             <!-- Header of the section -->
             <header>

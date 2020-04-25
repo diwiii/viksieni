@@ -12,7 +12,7 @@ class Product extends Model
      * @var array
      * 
      */
-    protected $fillable = [ 'category_id', 'slug', 'name', 'price', 'image', 'description' ];
+    protected $fillable = [ 'category_id', 'slug', 'name', 'price', 'image_id', 'description' ];
 
     /**
      * Get the category
@@ -37,4 +37,12 @@ class Product extends Model
     public function path() {
         return route('product.show', $this);
     }
+
+    // Get the image
+    // How about default values if nothing is returned?
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
+    }
+
 }
