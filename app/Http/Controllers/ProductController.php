@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Category;
+use App\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -120,28 +121,87 @@ class ProductController extends Controller
         return $request;
     }
 
+    
     /**
-     * Returns array with altered 'image' value;
+     * Returns array with altered 'image' value, 
+     * Returns array with additional key -> image_id
+     * 
      * 
      * @return array
      */
     protected function processImage($data) 
     {
-        $imagePath = $data['image']->store('uploads/product', 'public');
+        // Generate image name from slug and date
+        // $imageName = $data['slug']."-".date("d-m-y-his");
+        
+
+        // Store image as $imageName
+        // $imagePath = $data['image']->storeAs('uploads/section', $imageName);
+
+
+        // Store uploaded image , atm will store in images folder
+        $imagePath = $data['image']->store('uploads/images', 'public');
+
+        // Keep in mind that "Image" and "\Image" are two different things
 
         //Fetch the image
         $image = \Image::make(public_path("/storage/{$imagePath}"));
 
-        //Limit maximum image width to 768px, also prevent from upsizing
-        $image->widen(768, function ($constraint) {
+        // Get image name which will be saved in database
+        $imageName = $image->basename;
+        
+        // Create new record
+        $imageRow = new Image;
+        $imageRow = $imageRow->create(['url'=>$imageName]);
+        // Create 2 sizes record;
+        $imageRow->sizes()->createMany([
+
+            [
+            'width'=>768,
+            'url'=>'768/'.$imageName
+            ],
+
+            [
+            'width'=>480,
+            'url'=>'480/'.$imageName
+            ]
+
+        ]);
+
+        // Save image name and image_id back to array
+        $data = array_merge($data, [
+            'image' => $imageName,
+            'image_id' => $imageRow->id
+        ]);
+
+        //EDIT THE IMAGE SIZES
+
+        //TODO if we dont have folders 768 and 480 please create them, else we get errors.
+
+        // Limit maximum image width to 1024px, also prevent from upsizing
+        $image->widen(1024, function ($constraint) {
             $constraint->upsize();
         });
         $image->save();
 
-        //Merge the arrays
-        $data = array_merge($data, ['image' => $imagePath]);
+        //Fetch the image
+        $image = \Image::make(public_path("/storage/{$imagePath}"));
+        //Limit maximum image width to 768px, also prevent from upsizing
+        $image->widen(768, function ($constraint) {
+            $constraint->upsize();
+        });
+        $image->save($image->dirname."/768/".$image->basename);
+        
+        //Fetch the image
+        $image = \Image::make(public_path("/storage/{$imagePath}"));
+        //Limit maximum image width to 480px, also prevent from upsizing
+        $image->widen(480, function ($constraint) {
+            $constraint->upsize();
+        });
+        $image->save($image->dirname."/480/".$image->basename);
+
+        
 
         return $data;
     }
 }
-

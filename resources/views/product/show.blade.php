@@ -10,15 +10,19 @@
     <header>
         <h1>{{$product['name']}}</h1>
     </header>
-    <ul>
+    {{-- {{-- <ul> --}}
         @foreach($product as $key => $value)
         <li>
+            @if($key === 'image')
+                @continue
+            @endif
             {{$key}}:{{$value}}
+            
         </li>
         @endforeach
     </ul>
     @isset($product['image'])
-    <img src="/storage/{{$product['image']}}" alt="">
+        <p>Please get image sizes</p>
     @endisset
 </main>
 

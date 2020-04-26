@@ -5,6 +5,9 @@
 {{-- @section('title', 'Title') --}}
 
 @section('content')
+    @section('header')
+        @include('layouts.parts.landing.header')
+    @endsection
 
     {{-- This is nav in the header section of the body --}}
     @section('content-nav')
@@ -81,7 +84,7 @@
             
             {{-- TEMP, please add better way of doing this --}}
             @if($section['name'] === 'Sīrupi')
-            <a href="#sirupi" class="button red align-right">Apskatīties sīrupus</a>
+            <a href="{{route('darinajumi.index')}}" class="button red align-right">Apskatīties sīrupus</a>
             @endif
         </div>
     </section>

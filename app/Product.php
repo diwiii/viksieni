@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     /**
+     * The relationships that should always be loaded.
+     * 
+     * This points to sizes() method
+     *
+     * @var array
+     */
+    protected $with = ['image'];
+
+    /**
      * The attributes that are mass assignable.
      * 
      * @var array
