@@ -64,7 +64,7 @@
                 <!-- Item media -->
                 <figure>
                     <img class="border-px15 green box-shadow"
-                        style="max-width:380px"  
+                        style=""  
                         {{--  If we have image sizes--}}
                         @if(!empty($product['imageSize']))
 
