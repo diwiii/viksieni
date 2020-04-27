@@ -20,7 +20,7 @@ class CreateSectionsTable extends Migration
             $table->string('description')->nullable();
             $table->text('content')->nullable();
             $table->string('accent_color')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image_id')->nullable();
             $table->integer('arrangement')->nullable();
             $table->timestamps();
         });
