@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('slug')->unique(); //Check if this unique works
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image_id')->nullable();
             $table->decimal('quantity', 8, 2)->nullable();
             $table->decimal('price', 8, 2)->nullable();
             $table->timestamps();

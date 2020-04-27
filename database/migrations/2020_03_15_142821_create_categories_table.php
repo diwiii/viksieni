@@ -19,7 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('slug');
             $table->string('description')->nullable();
             $table->string('accent_color')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image_id')->nullable();
             $table->integer('arrangement')->nullable();
             $table->timestamps();
         });
