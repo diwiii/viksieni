@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('image_id')->nullable();
-            $table->decimal('quantity', 8, 2)->nullable();
+            $table->integer('volume')->nullable();
             $table->decimal('price', 8, 2)->nullable();
             $table->timestamps();
 

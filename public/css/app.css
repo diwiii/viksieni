@@ -445,13 +445,13 @@ header a:visited {
     margin: 1rem;
   }
 
+  .list li {
+    max-width: 300px;
+  }
+
   .list li h2,
   .list li p {
     margin: 0.5rem;
-  }
-
-  .list li .description {
-    max-width: 320px;
   }
 }
 

@@ -35,4 +35,9 @@ class Section extends Model
     {
         return $this->belongsTo(Image::class);
     }
+
+    public function routes()
+    {
+        return $this->morphToMany(Route::class, 'routable');
+    }
 }

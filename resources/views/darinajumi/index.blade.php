@@ -43,7 +43,7 @@
 <main>
 @foreach($categories as $category)
     <!-- Section of the main content -->
-    <section class="bg-green vh100 green2">
+    <section id="{{$category['slug']}}" class="bg-green vh100 green2">
         <header class="flexbox column stretchX maxWidth1024">
             <!-- Title of the section -->
             <h1 class="">{{$category['name']}}</h1>
@@ -52,12 +52,21 @@
                 {{$category['description']}}
             </p>
             @endif
+            <ul class="flexbox">
+                @forelse($category['products'] as $product)
+                    <li><a href="#{{$product['slug']}}">{{$product['name']}}</a></li>    
+                    
+
+                    @empty
+                    <li>Šajā kategorijā nav darinājumu</li>
+                @endforelse
+            </ul>
         </header>
         <!-- List of items -->
         <ul class="list maxWidth1024">
             @foreach($category['products'] as $product)
             <!-- Single item -->
-            <li>
+            <li id="{{$product['slug']}}">
                 {{-- {{dd($product['image']['url'])}} --}}
                 @if(!empty($product['image']))
                 {{-- {{dd($product)}} --}}
@@ -85,11 +94,15 @@
                 </figure>
                 @endif
                 <!-- Item title -->
-                <h2>{{$product['name']}}</h2>
+                <div class="">
+                    <h2 style="display:inline-block">{{$product['name']}}</h2>
+                    <!-- Back to the top button -->
+                    <a href="#sakne"><i class="material-icons">arrow_upward</i></a>
+                </div>
                 <p class="description">{{$product['description']}}</p>
                 <!-- Item details -->
                 <div class="flexbox row">
-                    <p>{{$product['quantity']}} ml</p>
+                    <p>{{$product['volume']}} ml</p>
                     <p>{{$product['price']}} €</p>
                     <a href="" class="button green align-right">Pasūtīt</a>
                 </div>

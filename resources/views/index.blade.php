@@ -82,15 +82,16 @@
                 {{$section['content']}}
             </p>
             
-            {{-- TEMP, please add better way of doing this --}}
-            @if($section['name'] === 'Sīrupi')
-            <a href="{{route('darinajumi.index')}}" class="button red align-right">Apskatīties sīrupus</a>
+            @if(!empty($section['urls']))
+                @foreach($section['urls'] as $url)
+                <a href="{{route('root').$url['url']}}" class="button red align-right">{{$url['title']}}</a>
+                @endforeach
             @endif
         </div>
     </section>
 @endforeach
 
-
+{{-- 
 @foreach($categories as $category)
 <!-- Section of the main content -->
 <section class="bg-yellow flip-flop">
@@ -120,7 +121,7 @@
         </p>
     </div>
 </section>
-@endforeach
+@endforeach --}}
 
 {{-- Šis ir paraugs produktu listingam --}}
 {{-- @foreach($products as $product)

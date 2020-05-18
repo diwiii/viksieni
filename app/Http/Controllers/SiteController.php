@@ -35,14 +35,13 @@ class SiteController extends Controller
         $categories = $categories->toArray();
 
         // Get Sections from database with image table
-        $sections = Section::with('image')->get();
+        $sections = Section::with(['image', 'routes'])->get();
 
         // Map into sections to sanitize Image size collection
         $sections = $sections->map(function($section){
             
             // This is section image
             $image = $section->image;
-
             // If we have image model associated with section
             if($image) {
                 // Tap into sizes model which is associated with image model
@@ -51,12 +50,23 @@ class SiteController extends Controller
                     return [$size->width => $size->url];
                 });
             }
+
+            // This is section routes
+            $routes = $section->routes;
+            // If we have routes model associated with section
+            if($routes) {
+                // Fetch $route->url and put it into array
+                $section['urls'] = $routes->map(function($route){
+                    return ['url'=>$route->url, 'title'=>$route->title];
+                })->toArray();
+            }
+
             return $section;
         });
 
         // Set sections collection to array
         $sections = $sections->toArray();
-
+        // dd($sections);
         //Get product list
         // $products = Product::all()->toArray();
 

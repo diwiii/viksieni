@@ -50,11 +50,12 @@
         }
 
         li {
+            max-width: 300px;
             h2, p {
                 margin: 0.5rem;
             }
             .description {
-                max-width: 320px;
+                // max-width: 320px;
             }
         }
     }
