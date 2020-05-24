@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Product;
 
+// Is used to generate PDF
+use \Dompdf\Dompdf;
+
 class GrozsController extends Controller
 {
     //
@@ -55,5 +58,23 @@ class GrozsController extends Controller
         \Cart::session($sessionId)->remove($product->id);
 
         return back()->with('removed', $product->name.' izņemts no groza!');
+    }
+
+    // Cart invoice
+    public function invoice() {
+        
+        return('Rekins');
+    }
+
+    // Generate invoice pdf
+    public function invoicePdf() {
+        // $html = file_get_contents(route('grozs.index'));
+
+        // $dompdf = new Dompdf();
+        // $dompdf->loadHTML($html);
+        // $dompdf->render();
+        // $dompdf->stream();
+
+        return('Rekins Pdf');
     }
 }

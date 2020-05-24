@@ -85,6 +85,9 @@ Route::get('/grozs', 'GrozsController@index')->name('grozs.index');
 Route::get('/grozs/pievienot/{product}', 'GrozsController@addToCart')->name('grozs.add');
 Route::delete('/grozs/{product}', 'GrozsController@delete')->name('grozs.delete');
 
+// Invoice
+Route::get('/grozs/rekins', 'GrozsController@invoice')->name('grozs.invoice');
+Route::get('/grozs/rekins/pdf', 'GrozsController@invoicePdf')->name('grozs.invoice-pdf');
 
 // Need to be last otherwise laravel will use all routes as variables for product
 Route::get('/{product}', 'ProductController@show')->name('product.show');
