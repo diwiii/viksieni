@@ -26,7 +26,7 @@
                 <a href="#ellas" class="button green2">Pasūtīt</a>
             </li>
             <li>
-                <a href="#sinepes" class="button green2">Darinājumi</a>
+                <a href="{{route('darinajumi.index')}}" class="button green2">Darinājumi</a>
             </li>
         </ul>
 

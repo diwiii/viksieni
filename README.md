@@ -1,3 +1,7 @@
+Noņēmu scrollbehaviour smooth iekš css , savādāk paliek sūdīgi kad pievieno produktus grozam
+
+Uzspiežam uz pogas pievienot grozam Controllieris nosūta atpakaļ uz tiko pasūtīto preci izmantojot viksieni.com/darinajumi#upenu-sirups
+
 TODO: Slugs need their own table which are assigned to ids
 
 Please add option: when uploading image ask for image description and insert it as alt atribute on img tag
@@ -15,7 +19,9 @@ Slugiem vajag atsevišķu tabulu kura norāda uz id un id uz slugu
 Edit the product and category records
 
 
-Laravel composer izmanto lai izveidotu piemēram formas, lai nav manuali jātaisa blade faili katram inputam
+Šī nav taisnība -> Laravel composer izmanto lai izveidotu piemēram formas, lai nav manuali jātaisa blade faili katram inputam
+
+
 is kinda fixed: We have issue with AppServiceProvider and getting data from database before database is created
 
 todo:

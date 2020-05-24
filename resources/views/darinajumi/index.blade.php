@@ -104,7 +104,7 @@
                 <div class="flexbox row">
                     <p>{{$product['volume']}} ml</p>
                     <p>{{$product['price']}} €</p>
-                    <a href="" class="button green align-right">Pasūtīt</a>
+                    <a href="{{route('grozs.add', $product['slug'])}}" class="button green align-right">Ielikt grozā</a>
                 </div>
             </li>
             @endforeach

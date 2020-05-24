@@ -31,6 +31,18 @@
 <body>
     @yield('header', View::make('layouts.parts.default.header'))
 
+    {{-- This should be into parts --}}
+    @if (session('added'))
+    <div class="alert alert-success">
+        {{ session('added') }}
+    </div>
+    @endif
+    @if (session('removed'))
+    <div class="alert alert-success">
+        {{ session('removed') }}
+    </div>
+    @endif
+
     @yield('content')
 </body>
 </html>

@@ -80,5 +80,11 @@ Route::get('/darinajumi', 'DarinajumiController@index')->name('darinajumi.index'
 // Route::put('/darinajumi/{darinajumi}', 'DarinajumiController@update')->name('darinajumi.update')->middleware('auth');
 // Route::delete('/darinajumi/{darinajumi}', 'DarinajumiController@destroy')->name('darinajumi.destroy')->middleware('auth');
 
+//
+Route::get('/grozs', 'GrozsController@index')->name('grozs.index');
+Route::get('/grozs/pievienot/{product}', 'GrozsController@addToCart')->name('grozs.add');
+Route::delete('/grozs/{product}', 'GrozsController@delete')->name('grozs.delete');
+
+
 // Need to be last otherwise laravel will use all routes as variables for product
 Route::get('/{product}', 'ProductController@show')->name('product.show');
