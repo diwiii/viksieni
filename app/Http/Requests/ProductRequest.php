@@ -31,6 +31,7 @@ class ProductRequest extends FormRequest
             'category_id' => 'required | numeric',
             'name' => 'required',
             'price' => 'nullable | numeric',
+            'volume' => 'nullable | numeric',
             'description' => 'nullable | string',
             'image' => 'nullable |  image | mimes:jpg,jpeg,png'
         ];

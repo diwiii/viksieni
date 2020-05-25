@@ -1,3 +1,5 @@
+Ziņot par kļūdu!
+
 Noņēmu scrollbehaviour smooth iekš css , savādāk paliek sūdīgi kad pievieno produktus grozam
 
 Uzspiežam uz pogas pievienot grozam Controllieris nosūta atpakaļ uz tiko pasūtīto preci izmantojot viksieni.com/darinajumi#upenu-sirups

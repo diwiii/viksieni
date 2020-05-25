@@ -16,12 +16,26 @@ class DarinajumiController extends Controller
      */
     public function index()
     {
+        // Get session key to use as unique identifier
+        $sessionId = request()->session()->getId();
+        $cart = \Cart::session($sessionId)->getContent()->pluck('id');
+
+        // dd($cart);
+
         // Get category list
         $categories = Category::orderBy('arrangement', 'asc')->with('products')->get();
 
         // Map into categories to sanitize Image size collection
-        $categories = $categories->map(function($category){
-            $category->products->map(function($product){
+        $categories = $categories->map(function($category) use ($cart){ // use -> pass variable inside closure
+            $category->products->map(function($product) use ($cart){
+
+                // Lets add attribute inCart if product is in cart 
+                if( $cart->contains($product->id) ) {
+                    $product['inCart'] = true;
+                } else {
+                    $product['inCart'] = false;
+                }
+
                 // This is section image
                 $image = $product->image;
                  // If we have image model associated with product
@@ -39,7 +53,7 @@ class DarinajumiController extends Controller
 
         // Make collection into array
         $categories = $categories->toArray();
-
+        
         return view('darinajumi.index', compact('categories'));
     }
 }

@@ -80,9 +80,10 @@ Route::get('/darinajumi', 'DarinajumiController@index')->name('darinajumi.index'
 // Route::put('/darinajumi/{darinajumi}', 'DarinajumiController@update')->name('darinajumi.update')->middleware('auth');
 // Route::delete('/darinajumi/{darinajumi}', 'DarinajumiController@destroy')->name('darinajumi.destroy')->middleware('auth');
 
-//
+// Grozs
 Route::get('/grozs', 'GrozsController@index')->name('grozs.index');
 Route::get('/grozs/pievienot/{product}', 'GrozsController@addToCart')->name('grozs.add');
+Route::put('/grozs/izmainit/{product}', 'GrozsController@update')->name('grozs.update');
 Route::delete('/grozs/{product}', 'GrozsController@delete')->name('grozs.delete');
 
 // Invoice

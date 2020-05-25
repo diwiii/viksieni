@@ -108,6 +108,25 @@
         </div>
         {{-- this is form input field with label --}}
         <div>
+            <label for="volume">Preces tilpums</label>
+            <input 
+            id="volume"
+            {{-- @error directive is fired and adds danger class whenever we get error --}}
+            @error('volume')
+            class="danger"
+            @enderror
+            type="text"
+            name="volume"
+            {{-- provide old input incase of error --}}
+            value="{{old('volume') ?? $product['volume']}}">
+    
+            {{-- if error message --}}
+            @error('volume')
+            <p>{{$errors->first('volume')}}</p>
+            @enderror
+        </div>
+        {{-- this is form input field with label --}}
+        <div>
             <label for="description">Preces apraksts</label>
             <textarea   id="description"
                         @error('description')

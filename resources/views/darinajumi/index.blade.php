@@ -67,9 +67,9 @@
             @foreach($category['products'] as $product)
             <!-- Single item -->
             <li id="{{$product['slug']}}">
-                {{-- {{dd($product['image']['url'])}} --}}
+                
                 @if(!empty($product['image']))
-                {{-- {{dd($product)}} --}}
+                
                 <!-- Item media -->
                 <figure>
                     <img class="border-px15 green box-shadow"
@@ -104,7 +104,22 @@
                 <div class="flexbox row">
                     <p>{{$product['volume']}} ml</p>
                     <p>{{$product['price']}} €</p>
-                    <a href="{{route('grozs.add', $product['slug'])}}" class="button green align-right">Ielikt grozā</a>
+                </div>
+                <!-- Item buttons -->
+                <div>
+                    @if($product['inCart'])
+                        <form method="POST" action="{{route('grozs.delete', $product['slug'])}}" enctype="multipart/form-data">
+                            {{-- method to use instead of POST --}}
+                            @method('DELETE')
+                            {{-- cross site request forgery --}}
+                            @csrf
+            
+                            <button type="submit" class="button red">Izņemt no groza</button>
+                        </form>
+                        <a href="{{route('grozs.index')}}" class="button green align-right">Grozs</a>
+                    @else
+                        <a href="{{route('grozs.add', $product['slug'])}}" class="button green align-right">Ielikt grozā</a>
+                    @endif
                 </div>
             </li>
             @endforeach

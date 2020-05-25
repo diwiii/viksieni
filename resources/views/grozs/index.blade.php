@@ -12,6 +12,9 @@
             <h3>Nosaukums</h3>
         </td>
         <td>
+            <h3>Tilpums (ml)</h3>
+        </td>
+        <td>
             <h3>Daudzums</h3>
         </td>
         <td>
@@ -26,7 +29,36 @@
             <p>{{$item->name}}</p>
         </td>
         <td>
+            <p>{{$item->attributes->volume}}</p>
+        </td>
+        <td>
+            <div class="flexbox">
+            <form method="POST" action="{{route('grozs.update', $item->attributes->slug)}}" enctype="multipart/form-data">
+                {{-- method to use instead of POST --}}
+                @method('PUT')
+                {{-- cross site request forgery --}}
+                @csrf
+
+                {{-- decrease value --}}
+                <input type="hidden" name="do" value="decrease">
+
+                <button type="submit">Mazāk</button>
+            </form>
+
             <p>{{$item->quantity}}</p>
+
+            <form method="POST" action="{{route('grozs.update', $item->attributes->slug)}}" enctype="multipart/form-data">
+                {{-- method to use instead of POST --}}
+                @method('PUT')
+                {{-- cross site request forgery --}}
+                @csrf
+
+                {{-- increase value --}}
+                <input type="hidden" name="do" value="increase">
+                
+                <button type="submit">Vairāk</button>
+            </form>
+            </div>
         </td>
         <td>
             <p>{{ number_format($item->price, 2, '.', '') }} €</p>
