@@ -30,6 +30,7 @@ Auth::routes([
 // Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout'); //Kā tas strādā?
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/home/omniva', 'HomeController@omnivaJSON')->name('omniva.locations');
 
 // App root
 Route::get('/', 'SiteController@index')->name('root');
