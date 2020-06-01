@@ -87,4 +87,15 @@
 @endif
 </table>
 
+
+    @if(session()->get('parcelMachine'))
+    <h2>
+        {{session()->get('parcelMachine')['NAME']}}
+    </h2>
+    <a href="{{route('omniva.index')}}">Izvēlēties citu pakomātu</a>
+    @else
+        <a href="{{route('omniva.index')}}">Izvēlēties Omniva pakomātu</a>
+    @endif
+
+
 @endsection
