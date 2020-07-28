@@ -6,6 +6,11 @@
 
 @section('content')
 
+<h1>Izvēlieties Omniva pakomātu</h1>
+
+<h2>Meklēt:</h2>
+<p></p>
+
 @isset($parcelMachines)
 {{-- Take FIRST Parcel Machine and get out original City name from details --}}
 <h2>Pilsēta: {{$parcelMachines[0]['A1_NAME'] ?? ''}}</h2>
@@ -26,8 +31,7 @@
 @endisset
 
 @isset($cities)
-<h1>Izvēlies Omniva pakomātu</h1>
-<h2>Pilsēta:</h2>
+<h2>Pilsētas kurās ir Omniva pakomāti:</h2>
 <ul>
 @foreach($cities as $cityKey => $parcelMachines)
     <li>

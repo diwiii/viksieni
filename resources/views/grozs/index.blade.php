@@ -91,6 +91,8 @@
     @if(session()->get('parcelMachine'))
     <h2>
         {{session()->get('parcelMachine')['NAME']}}
+        {{session()->get('parcelMachine')['X_COORDINATE']}}
+        {{session()->get('parcelMachine')['Y_COORDINATE']}}
     </h2>
     <a href="{{route('omniva.index')}}">Izvēlēties citu pakomātu</a>
     @else
