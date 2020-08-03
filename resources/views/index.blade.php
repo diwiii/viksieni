@@ -64,8 +64,8 @@
                 {{-- this is default --}}
                 src="/storage/uploads/images/{{$section['image']['url']}}"
 
-                alt="Daudz, gatavas Smiltsērkšķu eļļas pudelītes."
-                title="Smiltsērkšķu eļļa"
+                alt="Sīrupu pudelītes uz dēļa zālē, sākot no kreisās: Aveņu sīrups, Aveņu Smiltsērkšķu sīrups, Upeņu Smiltsērkšķu sīrups."
+                title="Sīrupu pudelītes"
 
                 class="border-px15 orange"
             >
