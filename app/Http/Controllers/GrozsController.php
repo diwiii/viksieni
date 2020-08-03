@@ -102,8 +102,20 @@ class GrozsController extends Controller
 
     // Cart invoice
     public function invoice() {
+        // Get session key to use as unique identifier
+        $sessionId = request()->session()->getId();
         
-        return('Rekins');
+        // \Cart::session($sessionId)->clear(); // Clear the cart
+
+        // Get the Cart contents
+        // Use sort otherwise when quantity is increased arrangement on cart table changes
+        $grozs = \Cart::session($sessionId)->getContent()->sortBy('name');
+
+        // dd($grozs);
+        // Get the Cart total price
+        $total = \Cart::session($sessionId)->getTotal();
+        
+        return view('invoice.index', compact('grozs', 'total'));
     }
 
     // Generate invoice pdf
