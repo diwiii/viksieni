@@ -7,15 +7,16 @@ use App\Image;
 
 class ImageController extends Controller
 {
-    // /**
-    //  * Display a listing of the resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function index()
-    // {
-    //     //
-    // }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+        return Image::all();
+    }
 
     // /**
     //  * Show the form for creating a new resource.
@@ -38,16 +39,18 @@ class ImageController extends Controller
     //     //
     // }
 
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($id)
-    // {
-    //     //
-    // }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Image $image)
+    {
+        //
+        $image = $image->toArray();
+        return view('image.show', compact('image'));
+    }
 
     /**
      * Show the form for editing the specified resource.

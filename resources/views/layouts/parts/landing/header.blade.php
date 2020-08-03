@@ -21,14 +21,15 @@
                     <a href="tel:+37126437844" class="button green2" target="_blank" title="Zvanīt saimniecei" rel="noopener noreferrer"><i class="material-icons" style="vertical-align: middle;">phone_enabled</i></a>
                 </li>
                 <li>
-                    <a href="#pastilas" class="button green2" title="Rakstīt saimniecei"><i class="material-icons" style="vertical-align: middle;">mail</i></a>
+                    {{-- <a href="mailto:viksieni@gmail.com" class="button green2" title="Rakstīt saimniecei"><i class="material-icons" style="vertical-align: middle;">mail</i></a> --}}
+                    <a href="mailto:viksieni@gmail.com" class="button green2" title="Rakstīt saimniecei">viksieni@gmail.com</a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="#ellas" class="button green2">Pasūtīt</a>
-                </li>
-                <li>
-                <a href="{{route('darinajumi.index')}}" class="button green2">Darinājumi</a>
-                </li>
+                </li> --}}
+                {{-- <li>
+                <a href="{{ route('darinajumi.index') ?? '' }}" class="button green2">Darinājumi</a>
+                </li> --}}
             </ul>
 
             {{-- Content navigation pagaidām atliekam --}}
