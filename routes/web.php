@@ -76,7 +76,7 @@ Route::put('/image/{image}', 'ImageController@update')->name('image.update')->mi
 // Route::delete('/image/{image}', 'ImageController@destroy')->name('image.destroy')->middleware('auth');
 
 // Darinajumi
-Route::get('/darinajumi', 'DarinajumiController@index')->name('darinajumi.index');
+// Route::get('/darinajumi', 'DarinajumiController@index')->name('darinajumi.index');
 // Route::post('/darinajumi', 'DarinajumiController@store')->name('darinajumi.store')->middleware('auth');
 // Route::get('/darinajumi/create', 'DarinajumiController@create')->name('darinajumi.create')->middleware('auth');
 // Route::get('/darinajumi/edit/{darinajumi}', 'DarinajumiController@edit')->name('darinajumi.edit')->middleware('auth');
@@ -85,14 +85,14 @@ Route::get('/darinajumi', 'DarinajumiController@index')->name('darinajumi.index'
 // Route::delete('/darinajumi/{darinajumi}', 'DarinajumiController@destroy')->name('darinajumi.destroy')->middleware('auth');
 
 // Grozs
-Route::get('/grozs', 'GrozsController@index')->name('grozs.index');
-Route::get('/grozs/pievienot/{product}', 'GrozsController@addToCart')->name('grozs.add');
-Route::put('/grozs/izmainit/{product}', 'GrozsController@update')->name('grozs.update');
-Route::delete('/grozs/{product}', 'GrozsController@delete')->name('grozs.delete');
+// Route::get('/grozs', 'GrozsController@index')->name('grozs.index');
+// Route::get('/grozs/pievienot/{product}', 'GrozsController@addToCart')->name('grozs.add');
+// Route::put('/grozs/izmainit/{product}', 'GrozsController@update')->name('grozs.update');
+// Route::delete('/grozs/{product}', 'GrozsController@delete')->name('grozs.delete');
 
 // Invoice
-Route::get('/grozs/rekins', 'GrozsController@invoice')->name('grozs.invoice');
-Route::get('/grozs/rekins/pdf', 'GrozsController@invoicePdf')->name('grozs.invoice-pdf');
+// Route::get('/grozs/rekins', 'GrozsController@invoice')->name('grozs.invoice');
+// Route::get('/grozs/rekins/pdf', 'GrozsController@invoicePdf')->name('grozs.invoice-pdf');
 
 // Need to be last otherwise laravel will use all routes as variables for product
 Route::get('/{product}', 'ProductController@show')->name('product.show');
