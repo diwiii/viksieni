@@ -12,7 +12,7 @@ class Image extends Model
      * @var array
      * 
      */
-    protected $fillable = ['url', 'title', 'description', 'accent_color'];
+    protected $fillable = ['url', 'name', 'description'];
 
     /**
      * The relationships that should always be loaded.

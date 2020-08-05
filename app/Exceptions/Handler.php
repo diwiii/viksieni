@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Http\Exceptions\PostTooLargeException;
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +51,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        // Catch the error if the file is too large and respond with error messasge;
+        if ($exception instanceof PostTooLargeException) {
+            return response('File is too large.');
+        }
+
         return parent::render($request, $exception);
     }
 }

@@ -68,8 +68,8 @@ Route::put('/section/{section}', 'SectionController@update')->name('section.upda
 Route::delete('/section/{section}', 'SectionController@destroy')->name('section.destroy')->middleware('auth');
 // Image
 Route::get('/image', 'ImageController@index')->name('image.index');
-// Route::post('/image', 'ImageController@store')->name('image.store')->middleware('auth');
-// Route::get('/image/create', 'ImageController@create')->name('image.create')->middleware('auth');
+Route::post('/image', 'ImageController@store')->name('image.store')->middleware('auth');
+Route::get('/image/create', 'ImageController@create')->name('image.create')->middleware('auth');
 Route::get('/image/edit/{image}', 'ImageController@edit')->name('image.edit')->middleware('auth');
 Route::get('/image/{image}', 'ImageController@show')->name('image.show');
 Route::put('/image/{image}', 'ImageController@update')->name('image.update')->middleware('auth');
