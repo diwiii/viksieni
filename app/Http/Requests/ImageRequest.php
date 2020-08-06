@@ -25,7 +25,7 @@ class ImageRequest extends FormRequest
     {
         //
         return [
-            'image' => 'nullable | mimes:jpg,jpeg,png | image | max:4096',
+            'image' => 'required|mimes:jpg,jpeg,png|image|max:4096',
             'name' => 'nullable | string',
             'description' => 'nullable | string'
         ];

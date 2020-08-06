@@ -92,9 +92,15 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ImageRequest $request, Image $image)
+    public function update(Request $request, Image $image)
     {
-        $image->update($this->processRequestData($request));
+        $validated = $request->validate([
+            'name' => 'nullable | string',
+            'description' => 'nullable | string'
+        ]);
+
+        $image->update($validated);
+        
         return redirect(route('image.index'))->with('status', 'Image updated');
     }
 

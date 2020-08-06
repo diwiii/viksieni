@@ -8,7 +8,7 @@ TODO: Remove or host on google images that ar marked as soft delete in database.
 TODO: Slugs need their own table which are assigned to ids
 
 ~~Please add option: when uploading image ask for image description and insert it as alt atribute on img tag~~
-
+~~PNG bildes neaplodajas.~~
 Add upload_max_filesize to 8mb in validation or depends on server settings!!!
 
 OMG this enctype="multipart/form-data 
