@@ -3,9 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Image extends Model
 {
+    /**
+     * Enable soft deletes trait
+     */
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      * 

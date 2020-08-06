@@ -73,7 +73,7 @@ Route::get('/image/create', 'ImageController@create')->name('image.create')->mid
 Route::get('/image/edit/{image}', 'ImageController@edit')->name('image.edit')->middleware('auth');
 Route::get('/image/{image}', 'ImageController@show')->name('image.show');
 Route::put('/image/{image}', 'ImageController@update')->name('image.update')->middleware('auth');
-// Route::delete('/image/{image}', 'ImageController@destroy')->name('image.destroy')->middleware('auth');
+Route::delete('/image/{image}', 'ImageController@destroy')->name('image.destroy')->middleware('auth');
 
 // Darinajumi
 // Route::get('/darinajumi', 'DarinajumiController@index')->name('darinajumi.index');

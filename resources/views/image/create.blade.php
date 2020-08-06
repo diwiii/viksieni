@@ -30,7 +30,8 @@
             type="file"
             name="image"
             {{-- provide old input incase of error --}}
-            value="{{old('image')}}">
+            value="{{old('image')}}"
+            required>
     
             {{-- if error message --}}
             @error('image')
@@ -50,7 +51,7 @@
             name="name"
             {{-- provide old input incase of error --}}
             value="{{old('name')}}"
-            >
+            autofocus>
     
             {{-- if error message --}}
             @error('name')

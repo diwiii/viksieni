@@ -1,75 +1,36 @@
 @extends('layouts.app')
 
 {{-- Title of the app or resource <title>App</title> --}}
-@section('title', $siteName . ' - Rediģēt ' . $product['name'])
+@section('title', $siteName . ' - Rediģēt bildi')
 
 @section('content')
 
 {{-- Main content of the document --}}
 <main>
     <header>
-        <h1>Rediģēt {{$product['name']}}</h1>
-        {{-- Lūdzu iespēju izvēlēties kategorijas --}}
-        <ul>
-            @foreach ($categories as $category)
-            <li>{{$category['name']}}, id: {{$category['id']}}</li>
-            @endforeach
-        </ul>
+        <h1>Rediģēt bildi ar id: {{$image->id}}</h1>
+        <div>
+            <a href="{{route('image.index')}}">Bilžu saraksts</a>
+        </div>
     </header>
-    
-    {{-- form to edit product instance --}}
-    <form method="POST" action="{{route('product.update', $product['slug'])}}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('image.update', $image->id) }}" enctype="multipart/form-data">
         {{-- method to use instead of POST --}}
         @method('PUT')
         {{-- cross site request forgery --}}
         @csrf
         {{-- the id --}}
-        <input type="hidden" name="id" value="{{$product['id']}}">
+        <input type="hidden" name="id" value="{{$image->id}}">
 
-        {{-- this is form input field with label --}}
+        {{-- THE SLUG ERROR --}}
+        @error('slug')
+        <p>{{$errors->first('slug')}}</p>
+        @enderror
         <div>
-            <label for="slug">url-vārds</label>
-            <input 
-            id="slug"
-            {{-- @error directive is fired and adds danger class whenever we get error --}}
-            @error('slug')
-            class="danger"
-            @enderror
-            type="text"
-            name="slug"
-            {{-- provide old input incase of error --}}
-            value="{{old('slug') ?? $product['slug']}}"
-            >
-
-            {{-- if error message --}}
-            @error('slug')
-            <p>{{$errors->first('slug')}}</p>
-            @enderror
+            <img src="{{url('/storage/uploads/images/480/'.$image->url)}}" alt="{{$image->description}}">
         </div>
         {{-- this is form input field with label --}}
         <div>
-            <label for="category_id">Preces iedalījums?</label>
-            <input 
-            id="category_id"
-            {{-- @error directive is fired and adds danger class whenever we get error --}}
-            @error('category_id')
-            class="danger"
-            @enderror
-            type="text"
-            name="category_id"
-            {{-- provide old input incase of error --}}
-            value="{{old('category_id') ?? $product['category_id']}}"
-            required
-            autofocus>
-
-            {{-- if error message --}}
-            @error('category_id')
-            <p>{{$errors->first('category_id')}}</p>
-            @enderror
-        </div>
-        {{-- this is form input field with label --}}
-        <div>
-            <label for="name">Preces nosaukums</label>
+            <label for="name">Bildes nosaukums</label>
             <input 
             id="name"
             {{-- @error directive is fired and adds danger class whenever we get error --}}
@@ -79,8 +40,8 @@
             type="text"
             name="name"
             {{-- provide old input incase of error --}}
-            value="{{old('name') ?? $product['name']}}"
-            required>
+            value="{{old('name') ?? $image->name}}"
+            autofocus>
     
             {{-- if error message --}}
             @error('name')
@@ -89,84 +50,27 @@
         </div>
         {{-- this is form input field with label --}}
         <div>
-            <label for="price">Preces cena</label>
-            <input 
-            id="price"
-            {{-- @error directive is fired and adds danger class whenever we get error --}}
-            @error('price')
-            class="danger"
-            @enderror
-            type="text"
-            name="price"
-            {{-- provide old input incase of error --}}
-            value="{{old('price') ?? $product['price']}}">
-    
-            {{-- if error message --}}
-            @error('price')
-            <p>{{$errors->first('price')}}</p>
-            @enderror
-        </div>
-        {{-- this is form input field with label --}}
-        <div>
-            <label for="volume">Preces tilpums</label>
-            <input 
-            id="volume"
-            {{-- @error directive is fired and adds danger class whenever we get error --}}
-            @error('volume')
-            class="danger"
-            @enderror
-            type="text"
-            name="volume"
-            {{-- provide old input incase of error --}}
-            value="{{old('volume') ?? $product['volume']}}">
-    
-            {{-- if error message --}}
-            @error('volume')
-            <p>{{$errors->first('volume')}}</p>
-            @enderror
-        </div>
-        {{-- this is form input field with label --}}
-        <div>
-            <label for="description">Preces apraksts</label>
+            <label for="description">Bildes apraksts</label>
             <textarea   id="description"
                         @error('description')
                         class="danger"
                         @enderror
                         name="description"
                         cols="30"
-                        rows="10">{{old('description') ?? $product['description']}}</textarea>
+                        rows="10">{{old('description') ?? $image->description}}</textarea>
     
             {{-- if error message --}}
             @error('description')
             <p>{{$errors->first('description')}}</p>
             @enderror
         </div>
-        {{-- this is form input field with label --}}
-        <div>
-            <label for="image">Preces bilde</label>
-            <input 
-            id="image"
-            {{-- @error directive is fired and adds danger class whenever we get error --}}
-            @error('image')
-            class="danger"
-            @enderror
-            type="file"
-            name="image"
-            {{-- provide old input incase of error --}}
-            value="{{old('image')}}">
-    
-            {{-- if error message --}}
-            @error('image')
-            <p>{{$errors->first('image')}}</p>
-            @enderror
-        </div>
-    
-        <button type="submit">Pievienot</button>
+        <button type="submit">Saglabāt izmaiņas</button>
     </form>
 
-    @isset($product['image'])
-    <img src="/storage/{{$product['image']}}" alt="">
-    @endisset
+    @foreach($image->sizes as $size)
+    <br>
+    {{$size->width}} : <a href="{{(url('/storage/uploads/images/'.$size->url))}}">{{(url('/storage/uploads/images/'.$size->url))}}</a>
+    @endforeach
 
     {{-- ASIDE --}}
     {{-- Pārtulkot latviski error fieldus php un html --}}

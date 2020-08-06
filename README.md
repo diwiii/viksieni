@@ -4,9 +4,10 @@ Noņēmu scrollbehaviour smooth iekš css , savādāk paliek sūdīgi kad pievie
 
 Uzspiežam uz pogas pievienot grozam Controllieris nosūta atpakaļ uz tiko pasūtīto preci izmantojot viksieni.com/darinajumi#upenu-sirups
 
+TODO: Remove or host on google images that ar marked as soft delete in database. Learn to clean up unused image files.
 TODO: Slugs need their own table which are assigned to ids
 
-Please add option: when uploading image ask for image description and insert it as alt atribute on img tag
+~~Please add option: when uploading image ask for image description and insert it as alt atribute on img tag~~
 
 Add upload_max_filesize to 8mb in validation or depends on server settings!!!
 
@@ -19,10 +20,6 @@ SLUG VALIDATION OMG CHECK THE SLUG
 Slugiem vajag atsevišķu tabulu kura norāda uz id un id uz slugu
 
 Edit the product and category records
-
-
-Šī nav taisnība -> Laravel composer izmanto lai izveidotu piemēram formas, lai nav manuali jātaisa blade faili katram inputam
-
 
 is kinda fixed: We have issue with AppServiceProvider and getting data from database before database is created
 

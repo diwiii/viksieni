@@ -16,7 +16,8 @@ class ImageController extends Controller
     public function index()
     {
         //
-        return Image::all();
+        $images = Image::all();
+        return view('image.index', compact('images'));
     }
 
     /**
@@ -81,6 +82,7 @@ class ImageController extends Controller
     public function edit(Image $image)
     {
         //
+        return view('image.edit', compact('image'));
     }
 
     /**
@@ -90,21 +92,25 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ImageRequest $request, Image $image)
     {
-        //
+        $image->update($this->processRequestData($request));
+        return redirect(route('image.index'))->with('status', 'Image updated');
     }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Image $image)
+    {
+        //
+        $image->delete();
+
+        return back()->with('status', 'Image with id: '.$image->id.' removed!');
+    }
 
     /**
      * Process validated request data
