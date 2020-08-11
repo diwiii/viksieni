@@ -58,8 +58,8 @@
                 {{-- this is default image--}}
                 src="/storage/uploads/images/{{$section->image->url}}"
 
-                alt="Sīrupu pudelītes uz dēļa zālē, sākot no kreisās: Aveņu sīrups, Aveņu Smiltsērkšķu sīrups, Upeņu Smiltsērkšķu sīrups."
-                title="Sīrupu pudelītes"
+                alt="{{$section->image->description}}"
+                title="{{$section->image->name}}"
 
                 class="border-px15 orange"
             >
