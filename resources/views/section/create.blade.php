@@ -17,6 +17,26 @@
 
         {{-- this is form input field with label --}}
         <div>
+            <label for="slug">url-vārds</label>
+            <input 
+            id="slug"
+            {{-- @error directive is fired and adds danger class whenever we get error --}}
+            @error('slug')
+            class="danger"
+            @enderror
+            type="text"
+            name="slug"
+            {{-- provide old input incase of error --}}
+            value="{{old('slug')}}"
+            >
+
+            {{-- if error message --}}
+            @error('slug')
+            <p>{{$errors->first('slug')}}</p>
+            @enderror
+        </div>
+        {{-- this is form input field with label --}}
+        <div>
             <label for="name">Section title</label>
             <input 
             id="name"
@@ -77,16 +97,13 @@
         {{-- this is form input field with label --}}
         <div>
             <label for="content">Saturs</label>
-            <input 
-            id="content"
-            {{-- @error directive is fired and adds danger class whenever we get error --}}
-            @error('content')
-            class="danger"
-            @enderror
-            type="text"
-            name="content"
-            {{-- provide old input incase of error --}}
-            value="{{old('content')}}">
+            <textarea   id="content"
+                        @error('content')
+                        class="danger"
+                        @enderror
+                        name="content"
+                        cols="30"
+                        rows="10">{{old('content') ?? ''}}</textarea>
     
             {{-- if error message --}}
             @error('content')
@@ -110,27 +127,6 @@
             {{-- if error message --}}
             @error('accent_color')
             <p>{{$errors->first('accent_color')}}</p>
-            @enderror
-        </div>
-        {{-- this is form input field with label --}}
-        <div>
-            <label for="image">Section bilde</label>
-            <input 
-            id="image"
-            {{-- @error directive is fired and adds danger class whenever we get error --}}
-            @error('image')
-            class="danger"
-            @enderror
-            type="file"
-            name="image"
-            {{-- provide old input incase of error --}}
-            {{-- we dont need old input for image --}}
-            {{-- value="{{old('image')}}" --}}
-            >
-    
-            {{-- if error message --}}
-            @error('image')
-            <p>{{$errors->first('image')}}</p>
             @enderror
         </div>
 

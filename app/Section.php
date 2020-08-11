@@ -12,7 +12,17 @@ class Section extends Model
      * @var array
      * 
      */
-    protected $fillable = [ 'slug', 'name', 'arrangement', 'image_id', 'description', 'accent_color', 'content' ];
+    protected $fillable = [ 'slug', 'name', 'arrangement', 'description', 'accent_color', 'content' ];
+
+    /**
+     * The relationships that should always be loaded.
+     * 
+     * This points to sizes() method
+     *
+     * @var array
+     */
+    // Do we need this?
+    // protected $with = ['images'];
 
     /**
      * Atrod Modeli pēc slug colonas , default ir pēc primaryKey tas ir ID
@@ -29,15 +39,25 @@ class Section extends Model
         return route('section.show', $this);
     }
     
-    // Get the image
-    // How about default values if nothing is returned?
+    /**
+     * Return first image from attached images;
+     */
     public function image()
     {
-        return $this->belongsTo(Image::class);
+        return $this->images()->first();
+        // How about default values if nothing is returned?
     }
 
     public function routes()
     {
         return $this->morphToMany(Route::class, 'routable');
+    }
+
+    /**
+     * Get all of the images for the section.
+     */
+    public function images()
+    {
+        return $this->morphToMany(Image::class, 'imageable');
     }
 }

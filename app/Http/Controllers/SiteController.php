@@ -22,50 +22,51 @@ class SiteController extends Controller
     {
         //This is landing page! or is this?
 
-        // Get category list
-        $categories = Category::orderBy('arrangement', 'asc')->get();
-        // $categories = Category::whereIn('id', [1,5])->get()->toArray();
+        // Get category collection
+        $categories = Category::with(['products'])->orderBy('arrangement', 'asc')->get();
     
-        //We do this so the products are accessible in $categories array
-        // THERE IS BETTER WAY -> eager loading 
-        foreach ($categories as $category) {
-            $category->products;
-        }
         // Set categories collection to Array
         $categories = $categories->toArray();
 
-        // Get Sections from database with image table
-        $sections = Section::with(['image', 'routes'])->get();
+        // Get Sections from database
+        $sections = Section::orderBy('arrangement', 'desc')->get();
 
-        // Map into sections to sanitize Image size collection
+        // Map into section and save first image from attached images to $section->image
         $sections = $sections->map(function($section){
-            
-            // This is section image
-            $image = $section->image;
-            // If we have image model associated with section
-            if($image) {
-                // Tap into sizes model which is associated with image model
-                // Add imageSize array to $section
-                $section['imageSize'] = $image->sizes->mapWithKeys(function($size){
-                    return [$size->width => $size->url];
-                });
-            }
-
-            // This is section routes
-            $routes = $section->routes;
-            // If we have routes model associated with section
-            if($routes) {
-                // Fetch $route->url and put it into array
-                $section['urls'] = $routes->map(function($route){
-                    return ['url'=>$route->url, 'title'=>$route->title];
-                })->toArray();
-            }
-
+            $section->image = $section->image();
             return $section;
         });
 
+        // dd($sections);
+        // // Map into sections to sanitize Image size collection
+        // $sections = $sections->map(function($section){
+            
+        //     // This is section image
+        //     $image = $section->image;
+        //     // If we have image model associated with section
+        //     if($image) {
+        //         // Tap into sizes model which is associated with image model
+        //         // Add imageSize array to $section
+        //         $section['imageSize'] = $image->sizes->mapWithKeys(function($size){
+        //             return [$size->width => $size->url];
+        //         });
+        //     }
+
+        //     // This is section routes
+        //     $routes = $section->routes;
+        //     // If we have routes model associated with section
+        //     if($routes) {
+        //         // Fetch $route->url and put it into array
+        //         $section['urls'] = $routes->map(function($route){
+        //             return ['url'=>$route->url, 'title'=>$route->title];
+        //         })->toArray();
+        //     }
+
+        //     return $section;
+        // });
+
         // Set sections collection to array
-        $sections = $sections->toArray();
+        // $sections = $sections->toArray();
         // dd($sections);
         //Get product list
         // $products = Product::all()->toArray();

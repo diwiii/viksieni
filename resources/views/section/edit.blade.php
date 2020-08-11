@@ -25,6 +25,12 @@
         @csrf
         {{-- the id --}}
         <input type="hidden" name="id" value="{{$section['id']}}">
+        
+        {{-- if we have selected image, pass selected image id --}}
+        {{-- the id of the selected image --}}
+        @isset($image)
+        <input type="hidden" name="imageId" value="{{$image->id}}">
+        @endisset
 
         {{-- this is form input field with label --}}
         <div>
@@ -168,8 +174,19 @@
         <button type="submit">Saglabāt izmaiņas</button>
     </form>
 
-    @isset($section['image'])
-    <img src="/storage/{{$section['image']}}" alt="">
+    {{-- Choose picture link--}}
+    <a href="{{url(route('section.edit', $section->slug).'?select=image')}}">select image</a>
+
+    {{-- Selected picture --}}
+    @isset($image)
+        <p>Izvēlētā bilde</p>
+        <img src="{{url('/storage/uploads/images/480/'.$image->url)}}" alt="{{$image->description}}">
+    @endisset
+
+    {{-- Previous picture --}}
+    @isset($section->image()->url)
+        <p>Esošā bilde</p>
+        <img src="{{url('/storage/uploads/images/480/'.$section->image()->url)}}" alt="{{$section->image()->description}}">
     @endisset
 <main>
 @endsection

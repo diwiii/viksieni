@@ -43,44 +43,45 @@
 <main>
 <table>
     <tr>
-        {{-- show selection button if we get this variable --}}
-        @isset($section)
-            <th>Izvēlēties bildi</th>
-        @endisset
         @auth
         <th>edit</th>
         @endauth
         <th>id</th>
-        <th>thumbnail</th>
-        <th>url</th>
+        <th>slug</th>
+        <th>image</th>
         <th>name</th>
         <th>description</th>
+        <th>content</th>
+        <th>accent_color</th>
+        <th>arrangement</th>
         <th>created_at</th>
         <th>updated_at</th>
         @auth
         <th>destroy</th>
         @endauth
     </tr>
-@foreach ($images as $image)
+@foreach ($sections as $section)
     <tr>
-        @isset($section)
-        <td><a href="{{url(route('section.edit', $section->slug).'?imageId='.$image->id)}}">this image</a></td>
-        @endisset
         @auth
-        <td><a href="{{route('image.edit', $image->id)}}">Rediģēt</a></td>
+        <td><a href="{{route('section.edit', $section->slug)}}">Rediģēt</a></td>
         @endauth
-        <td>{{$image->id}}</td>
-        <td><img src="{{url('/storage/uploads/images/'.$image->url)}}" alt="{{$image->description}}" height="100"></td>
-        <td><a href="{{url('/storage/uploads/images/'.$image->url)}}">{{url('/storage/uploads/images/'.$image->url)}}</a></td>
-        <td>{{$image->name}}</td>
-        <td>{{$image->description}}</td>
-        <td>{{$image->created_at}}</td>
-        <td>{{$image->updated_at}}</td>
+        <td>{{$section->id}}</td>
+        <td>{{$section->slug}}</td>
+        <td>
+            <a href="{{url(route('section.edit', $section->slug).'?select=image')}}">select image</a>
+        </td>
+        <td>{{$section->name}}</td>
+        <td>{{$section->description}}</td>
+        <td>{{$section->content}}</td>
+        <td>{{$section->accent_color}}</td>
+        <td>{{$section->arrangement}}</td>
+        <td>{{$section->created_at}}</td>
+        <td>{{$section->updated_at}}</td>
         @auth
         <td>
             @component('delete')
                 @slot('route')
-                {{ route('image.destroy', $image->id) }}
+                {{ route('section.destroy', $section->slug) }}
                 @endslot
             @endcomponent
         </td>

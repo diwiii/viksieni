@@ -1,9 +1,14 @@
+Funkcija kas pārbauda vai ir pieejami dažādi izmēri vienai bildei.
+
 Ziņot par kļūdu!
 
 Noņēmu scrollbehaviour smooth iekš css , savādāk paliek sūdīgi kad pievieno produktus grozam
 
 Uzspiežam uz pogas pievienot grozam Controllieris nosūta atpakaļ uz tiko pasūtīto preci izmantojot viksieni.com/darinajumi#upenu-sirups
 
+TODO: option to select image when section is created.
+TODO: remove image_id column from sections table
+TODO: Add soft delete for Sections
 TODO: Remove or host on google images that ar marked as soft delete in database. Learn to clean up unused image files.
 TODO: Slugs need their own table which are assigned to ids
 

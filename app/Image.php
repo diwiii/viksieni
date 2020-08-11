@@ -39,4 +39,11 @@ class Image extends Model
         return $this->hasMany(ImageSize::class, 'image_id'); // select * from sizes where image_id = 
     }
 
+    /**
+     * Get all of the sections that are assigned this image.
+     */
+    public function sections() {
+        return $this->morphedByMany(Section::class, 'imageable');
+    }
+
 }

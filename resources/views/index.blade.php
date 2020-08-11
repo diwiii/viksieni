@@ -48,21 +48,15 @@
     <!-- Section of the main content -->
     <section class="bg-{{$section['accent_color'] ?? 'yellow'}} flip-flop">
         <!-- Media of the section -->
-        @isset($section['image'])
+        @isset($section->image)
         <figure class="media">
             <img
-                
-                {{--  If we have image sizes--}}
-                @if(!empty($section['imageSize']))
-
-                srcset="/storage/uploads/images/{{$section['imageSize'][480]}} 480w,
-                        /storage/uploads/images/{{$section['imageSize'][768]}} 768w"
+                srcset="/storage/uploads/images/480/{{$section->image->url}} 480w,
+                        /storage/uploads/images/768/{{$section->image->url}} 768w"
                 sizes="(max-width: 580px) 480px,
                         768px"
-
-                @endif
-                {{-- this is default --}}
-                src="/storage/uploads/images/{{$section['image']['url']}}"
+                {{-- this is default image--}}
+                src="/storage/uploads/images/{{$section->image->url}}"
 
                 alt="Sīrupu pudelītes uz dēļa zālē, sākot no kreisās: Aveņu sīrups, Aveņu Smiltsērkšķu sīrups, Upeņu Smiltsērkšķu sīrups."
                 title="Sīrupu pudelītes"
@@ -81,12 +75,13 @@
             <p>
                 {{$section['content']}}
             </p>
-            
-            @if(!empty($section['urls']))
-                @foreach($section['urls'] as $url)
-                <a href="{{route('root').$url['url']}}" class="button red align-right">{{$url['title']}}</a>
+
+            @isset($section->routes->first()->exists)
+                @foreach($section->routes as $link)
+                    <a href="{{url($link->url)}}" class="button red align-right">{{$link->title}}</a>
                 @endforeach
-            @endif
+            @endisset
+            
         </div>
     </section>
 @endforeach

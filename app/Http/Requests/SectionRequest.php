@@ -35,7 +35,7 @@ class SectionRequest extends FormRequest
             'description' => 'nullable | string',
             'content' => 'nullable | string',
             'accent_color' => 'nullable | string',
-            'image' => 'nullable | mimes:jpg,jpeg,png | image'
+            'imageId' => 'nullable | integer'
         ];
     }
 
