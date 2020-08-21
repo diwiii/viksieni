@@ -26,6 +26,12 @@
         {{-- the id --}}
         <input type="hidden" name="id" value="{{$product['id']}}">
 
+        {{-- if we have selected image, pass selected image id --}}
+        {{-- the id of the selected image --}}
+        @isset($image)
+        <input type="hidden" name="imageId" value="{{$image->id}}">
+        @endisset
+
         {{-- this is form input field with label --}}
         <div>
             <label for="slug">url-vārds</label>
@@ -164,9 +170,24 @@
         <button type="submit">Pievienot</button>
     </form>
 
-    @isset($product['image'])
-    <img src="/storage/{{$product['image']}}" alt="">
+    {{-- Choose picture link--}}
+    <a href="{{url(route('product.edit', $product->slug).'?select=image')}}">select image</a>
+
+    {{-- Selected picture --}}
+    @isset($image)
+        <p>Izvēlētā bilde</p>
+        <img src="{{url('/storage/uploads/images/480/'.$image->url)}}" alt="{{$image->description}}">
     @endisset
+
+    {{-- Previous picture --}}
+    @isset($product->image()->url)
+        <p>Esošā bilde</p>
+        <img src="{{url('/storage/uploads/images/480/'.$product->image()->url)}}" alt="{{$product->image()->description}}">
+    @endisset
+
+    {{-- @isset($product['image'])
+    <img src="/storage/{{$product['image']}}" alt="">
+    @endisset --}}
 
     {{-- ASIDE --}}
     {{-- Pārtulkot latviski error fieldus php un html --}}

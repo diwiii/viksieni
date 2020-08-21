@@ -51,6 +51,7 @@
         @isset($section->image)
         <figure class="media">
             <img
+                {{-- Please add check if we have image sizes --}}
                 srcset="/storage/uploads/images/480/{{$section->image->url}} 480w,
                         /storage/uploads/images/768/{{$section->image->url}} 768w"
                 sizes="(max-width: 580px) 480px,

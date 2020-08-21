@@ -6,6 +6,7 @@ Noņēmu scrollbehaviour smooth iekš css , savādāk paliek sūdīgi kad pievie
 
 Uzspiežam uz pogas pievienot grozam Controllieris nosūta atpakaļ uz tiko pasūtīto preci izmantojot viksieni.com/darinajumi#upenu-sirups
 
+TODO: Add check if image sizes ar available
 TODO: option to select image when section is created.
 TODO: remove image_id column from sections table
 TODO: Add soft delete for Sections

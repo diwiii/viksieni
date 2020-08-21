@@ -21,8 +21,9 @@
         </li>
         @endforeach
     </ul>
-    @isset($product['image'])
-        <p>Please get image sizes</p>
+    @isset($product->image()->url)
+        <p>Esošā bilde</p>
+        <img src="{{url('/storage/uploads/images/480/'.$product->image()->url)}}" alt="{{$product->image()->description}}">
     @endisset
 </main>
 

@@ -44,6 +44,7 @@ Route::put('/site/{site}', 'SiteController@update')->name('site.update')->middle
 /////////////
 
 // Product
+Route::get('/product', 'ProductController@index')->name('product.index');
 Route::post('/product', 'ProductController@store')->middleware('auth');
 Route::get('/product/create', 'ProductController@create')->name('product.create')->middleware('auth');
 Route::get('/product/edit/{product}', 'ProductController@edit')->name('product.edit')->middleware('auth');
@@ -76,19 +77,19 @@ Route::put('/image/{image}', 'ImageController@update')->name('image.update')->mi
 Route::delete('/image/{image}', 'ImageController@destroy')->name('image.destroy')->middleware('auth');
 
 // Darinajumi
-// Route::get('/darinajumi', 'DarinajumiController@index')->name('darinajumi.index');
+Route::get('/darinajumi', 'DarinajumiController@index')->name('darinajumi.index');
 // Route::post('/darinajumi', 'DarinajumiController@store')->name('darinajumi.store')->middleware('auth');
 // Route::get('/darinajumi/create', 'DarinajumiController@create')->name('darinajumi.create')->middleware('auth');
 // Route::get('/darinajumi/edit/{darinajumi}', 'DarinajumiController@edit')->name('darinajumi.edit')->middleware('auth');
-// Route::get('/darinajumi/{darinajumi}', 'DarinajumiController@show')->name('darinajumi.show');
+// Route::get('/darinajumi/{darinajumi}', function() { abort(404); });
 // Route::put('/darinajumi/{darinajumi}', 'DarinajumiController@update')->name('darinajumi.update')->middleware('auth');
 // Route::delete('/darinajumi/{darinajumi}', 'DarinajumiController@destroy')->name('darinajumi.destroy')->middleware('auth');
 
 // Grozs
-// Route::get('/grozs', 'GrozsController@index')->name('grozs.index');
-// Route::get('/grozs/pievienot/{product}', 'GrozsController@addToCart')->name('grozs.add');
-// Route::put('/grozs/izmainit/{product}', 'GrozsController@update')->name('grozs.update');
-// Route::delete('/grozs/{product}', 'GrozsController@delete')->name('grozs.delete');
+Route::get('/grozs', 'GrozsController@index')->name('grozs.index');
+Route::get('/grozs/pievienot/{product}', 'GrozsController@addToCart')->name('grozs.add');
+Route::put('/grozs/izmainit/{product}', 'GrozsController@update')->name('grozs.update');
+Route::delete('/grozs/{product}', 'GrozsController@delete')->name('grozs.delete');
 
 // Invoice
 // Route::get('/grozs/rekins', 'GrozsController@invoice')->name('grozs.invoice');

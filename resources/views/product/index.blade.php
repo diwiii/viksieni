@@ -43,47 +43,45 @@
 <main>
 <table>
     <tr>
-        {{-- show selection button if we get this variable --}}
-        @if(isset($section) || isset($product))
-        <th>Izvēlēties bildi</th>
-        @endif
         @auth
         <th>edit</th>
         @endauth
         <th>id</th>
-        <th>thumbnail</th>
-        <th>url</th>
+        <th>slug</th>
+        <th>image</th>
         <th>name</th>
         <th>description</th>
+        <th>content</th>
+        <th>accent_color</th>
+        <th>arrangement</th>
         <th>created_at</th>
         <th>updated_at</th>
         @auth
         <th>destroy</th>
         @endauth
     </tr>
-@foreach ($images as $image)
+@foreach ($products as $product)
     <tr>
-        @isset($section)
-        <td><a href="{{url(route('section.edit', $section->slug).'?imageId='.$image->id)}}">this image</a></td>
-        @endisset
-        @isset($product)
-        <td><a href="{{url(route('product.edit', $product->slug).'?imageId='.$image->id)}}">this image</a></td>
-        @endisset
         @auth
-        <td><a href="{{route('image.edit', $image->id)}}">Rediģēt</a></td>
+        <td><a href="{{route('product.edit', $product->slug)}}">Rediģēt</a></td>
         @endauth
-        <td>{{$image->id}}</td>
-        <td><img src="{{url('/storage/uploads/images/'.$image->url)}}" alt="{{$image->description}}" height="100"></td>
-        <td><a href="{{url('/storage/uploads/images/'.$image->url)}}">{{url('/storage/uploads/images/'.$image->url)}}</a></td>
-        <td>{{$image->name}}</td>
-        <td>{{$image->description}}</td>
-        <td>{{$image->created_at}}</td>
-        <td>{{$image->updated_at}}</td>
+        <td>{{$product->id}}</td>
+        <td>{{$product->slug}}</td>
+        <td>
+            <a href="{{url(route('product.edit', $product->slug).'?select=image')}}">select image</a>
+        </td>
+        <td>{{$product->name}}</td>
+        <td>{{$product->description}}</td>
+        <td>{{$product->content}}</td>
+        <td>{{$product->accent_color}}</td>
+        <td>{{$product->arrangement}}</td>
+        <td>{{$product->created_at}}</td>
+        <td>{{$product->updated_at}}</td>
         @auth
         <td>
             @component('delete')
                 @slot('route')
-                {{ route('image.destroy', $image->id) }}
+                {{ route('product.destroy', $product->slug) }}
                 @endslot
             @endcomponent
         </td>

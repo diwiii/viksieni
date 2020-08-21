@@ -39,6 +39,11 @@ class Section extends Model
         return route('section.show', $this);
     }
     
+    public function routes()
+    {
+        return $this->morphToMany(Route::class, 'routable');
+    }
+
     /**
      * Return first image from attached images;
      */
@@ -46,11 +51,6 @@ class Section extends Model
     {
         return $this->images()->first();
         // How about default values if nothing is returned?
-    }
-
-    public function routes()
-    {
-        return $this->morphToMany(Route::class, 'routable');
     }
 
     /**

@@ -33,7 +33,7 @@ class ProductRequest extends FormRequest
             'price' => 'nullable | numeric',
             'volume' => 'nullable | numeric',
             'description' => 'nullable | string',
-            'image' => 'nullable |  image | mimes:jpg,jpeg,png'
+            'imageId' => 'nullable | integer'
         ];
     }
     

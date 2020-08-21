@@ -13,7 +13,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $with = ['image'];
+    // protected $with = ['image'];
 
     /**
      * The attributes that are mass assignable.
@@ -47,11 +47,20 @@ class Product extends Model
         return route('product.show', $this);
     }
 
-    // Get the image
-    // How about default values if nothing is returned?
+    /**
+     * Return first image from attached images;
+     */
     public function image()
     {
-        return $this->belongsTo(Image::class);
+        return $this->images()->first();
+        // How about default values if nothing is returned?
     }
 
+    /**
+     * Get all of the images for the product.
+     */
+    public function images()
+    {
+        return $this->morphToMany(Image::class, 'imageable');
+    }
 }

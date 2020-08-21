@@ -36,23 +36,24 @@ class DarinajumiController extends Controller
                     $product['inCart'] = false;
                 }
 
-                // This is section image
-                $image = $product->image;
-                 // If we have image model associated with product
-                if($image) {
-                // Tap into sizes model which is associated with image model
-                // Add imageSize array to $product
-                $product['imageSize'] = $image->sizes->mapWithKeys(function($size){
-                    return [$size->width => $size->url];
-                })->toArray();
+                // // This is section image
+                // $image = $product->image();
+                // dd($image);
+                //  // If we have image model associated with product
+                // if($image) {
+                // // Tap into sizes model which is associated with image model
+                // // Add imageSize array to $product
+                // $product['imageSize'] = $image->sizes->mapWithKeys(function($size){
+                //     return [$size->width => $size->url];
+                // })->toArray();
 
-            }
+                // }
             });
             return $category;
         });
 
         // Make collection into array
-        $categories = $categories->toArray();
+        // $categories = $categories->toArray();
         
         return view('darinajumi.index', compact('categories'));
     }

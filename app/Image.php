@@ -45,5 +45,11 @@ class Image extends Model
     public function sections() {
         return $this->morphedByMany(Section::class, 'imageable');
     }
+    /**
+     * Get all of the products that are assigned this image.
+     */
+    public function products() {
+        return $this->morphedByMany(Product::class, 'imageable');
+    }
 
 }

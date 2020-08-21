@@ -20,6 +20,9 @@ class ProductController extends Controller
     public function index()
     {
         //
+        $products = Product::all();
+
+        return view('product.index', compact('products'));
     }
 
     /**
@@ -58,7 +61,6 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
-        $product = $product->toArray();
         return view('product.show', compact('product'));
     }
 
@@ -70,9 +72,28 @@ class ProductController extends Controller
      */
     public function edit(Product $product )
     {
+        // Set $image to null in case if we don't get imageId
+        $image = null;
+
+        // If url query contains ?select=image
+        if (request('select') === 'image') {
+            $images = Image::all();
+            
+            // Return list of all images with option to select one for the product.
+            // We pass Product to View so that we know for which product we choose image.
+            return view('image.index', compact('images', 'product'));
+        }
+
+        // If url query contains ?imageId=$image->id
+        if (request('imageId')) {
+            $imageId = request('imageId');
+            // Get the image for selected id or fail.
+            $image = Image::findOrFail($imageId);
+        }
+        
         // Get the categories
         $categories = Category::all();
-        return view('product.edit', compact('categories', 'product'));
+        return view('product.edit', compact('categories', 'product', 'image'));
     }
 
     /**
@@ -84,8 +105,15 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
+        $request = $this->processRequestData($request);
+
         // Product please update model validated and processed request data.
-        $product->update($this->processRequestData($request));
+        $product->update($request);
+
+        // If we have imageId attach it to section.
+        if ( isset($request['imageId']) ) {
+            $product->images()->attach($request['imageId']);
+        }
 
         //Returns to edited resource
         return redirect($product->path());
@@ -115,9 +143,9 @@ class ProductController extends Controller
     {
         $request = $request->validated();
         // Check if image key exists
-        if (array_key_exists('image', $request)) {
-            $request = $this->processImage($request);
-        }
+        // if (array_key_exists('image', $request)) {
+        //     $request = $this->processImage($request);
+        // }
         return $request;
     }
 

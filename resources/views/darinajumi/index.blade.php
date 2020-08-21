@@ -67,32 +67,27 @@
             @foreach($category['products'] as $product)
             <!-- Single item -->
             <li id="{{$product['slug']}}">
-                
-                @if(!empty($product['image']))
-                
+            
+                @isset($product->image()->url)
+                            
                 <!-- Item media -->
                 <figure>
                     <img class="border-px15 green box-shadow"
-                        style=""  
-                        {{--  If we have image sizes--}}
-                        @if(!empty($product['imageSize']))
-
-                        srcset="/storage/uploads/images/{{$product['imageSize'][480]}} 480w,
-                                /storage/uploads/images/{{$product['imageSize'][768]}} 768w"
+                        {{-- Please add check if we have image sizes --}}
+                        srcset="/storage/uploads/images/480/{{$product->image()->url}} 480w,
+                                /storage/uploads/images/768/{{$product->image()->url}} 768w"
                         sizes="(max-width: 580px) 480px,
                                 768px"
+                        {{-- this is default image--}}
+                        src="/storage/uploads/images/{{$product->image()->url}}"
 
-                        @endif
-                        {{-- this is default --}}
-                        src="/storage/uploads/images/{{$product['image']['url']}}"
-
-                        alt="Daudz, gatavas Smiltsērkšķu eļļas pudelītes."
-                        title="Smiltsērkšķu eļļa"
+                        alt="{{$product->image()->description}}"
+                        title="{{$product->image()->name}}"
 
                         class="border-px15 orange"
                     >
                 </figure>
-                @endif
+                @endisset
                 <!-- Item title -->
                 <div class="">
                     <h2 style="display:inline-block">{{$product['name']}}</h2>
